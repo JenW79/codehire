@@ -1,7 +1,7 @@
 {
-  "name": "assessment-for-sprint-13-api-documentation-airbnb",
+  "name": "codehire",
   "version": "1.0.0",
-  "description": "![Database Schema](./images/airbnb-schema.png)",
+  "description": "Codehire: A tech job search and tracker",
   "main": "index.js",
   "directories": {
     "test": "test"

@@ -9,8 +9,9 @@
     "start:development": "nodemon ./bin/www",
     "start:production": "node ./bin/www",
     "build": "node psql-setup-script.js",
-    "resetDb":"npx dotenv sequelize db:seed:undo:all && npx dotenv sequelize db:migrate:undo:all && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all"
+    "resetDb":"rm -f db/dev.db && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",
