@@ -1,0 +1,10 @@
+# Ignore node_modules
+node_modules
+#other
+test/
+.env
+build
+.DS_Store
+*.db
+config/
+/.history/

@@ -1,0 +1,161 @@
+.navbar {
+  background-color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  max-width: 100%;
+  width: 100%;
+}
+.logo {
+  height: auto;
+  max-height: 50px;
+  width: auto;
+  cursor: pointer;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  display: flex;
+  align-items: center;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 25px; 
+  padding: 5px 12px; 
+  cursor: pointer;
+  height: 35px; 
+  position: relative;
+  margin-right: 20px; 
+}
+
+/* Profile Button (Button itself) */
+.profile-icon {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 8px;
+}
+
+/* Adjust individual icon spacing */
+.menu-icon {
+  font-size: 18px;
+  color: black;
+  margin-left: 5px;
+}
+
+.profile-icon svg { /* Ensures both icons align correctly */
+  font-size: 18px;
+  color: black;
+}
+
+
+/* Dropdown Menu */
+.profile-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: white;
+  border: 2px solid black;
+  list-style: none;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.profile-dropdown li {
+  padding: 8px 12px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.profile-dropdown li:hover {
+  background-color: #f2f2f2;
+}
+
+.profile-dropdown li:first-child {
+  font-weight: bold;
+}
+
+.profile-dropdown li.manage-spots {
+  font-weight: bold;
+  padding-top: 5px;
+}
+
+/* Manage Spots Link */
+.manage-spots {
+  font-weight: bold;
+  padding-top: 5px;
+  color: black;
+}
+
+
+.manage-spots:hover {
+  text-decoration: underline;
+}
+
+/* Logout Button */
+.logout-button {
+  background-color: #444;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.logout-button:hover {
+  background-color: darkgrey;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Create a New Spot Link */
+.create-spot-link {
+  position: absolute;
+  right: 150px;  
+  font-weight: bold;
+  color: rgb(59, 79, 59);
+  text-decoration: none;
+}
+
+.create-spot-link:hover {
+  text-decoration: underline;
+  background-color: #f2f2f2;
+}
+
+.profile-dropdown hr {
+  border: none; 
+  border-top: 1px solid black;  
+  margin: 8px 0; 
+  width: 100%; 
+  list-style: none;  
+}

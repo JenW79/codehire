@@ -1,0 +1,30 @@
+[33m585f596[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/dev[m[33m, [m[1;31morigin/auth-setup[m[33m, [m[1;32mdev[m[33m, [m[1;32mauth-setup[m[33m)[m Added middleware
+[33mf6c62b4[m Added Users table migration and seeds
+[33mac2b4ef[m Add database schema design to README and added API endpoints
+[33mf7ddc46[m Add error-handling middleware for common errors and debugging
+[33m5106c0e[m Added an API router
+[33ma0b47c9[m updated
+[33m6e41cbd[m updated
+[33m5f2da8f[m Move files into backend folder
+[33ma25f3d8[m API Doc update
+[33m3f5df99[m API Doc update
+[33m15b8009[m Updated from solution change by ssoonmi
+[33md876892[m Updated from solution change by ssoonmi
+[33meeaca7d[m Updated from solution change by brtrick
+[33mb014b58[m Updated from solution change by jessesbyers
+[33m2b95309[m Updated from solution change by jessesbyers
+[33m5b54902[m Updated from solution change by ssoonmi
+[33mc2b78db[m Updated from solution change by ssoonmi
+[33mcf0806c[m Updated from solution change by ssoonmi
+[33m01c3b17[m Updated from solution change by ssoonmi
+[33mf877310[m Updated from solution change by ssoonmi
+[33m223336d[m Updated from solution change by brtrick
+[33md3e3ef9[m Updated from solution change by ssoonmi
+[33me64d37b[m Updated from solution change by JBui923
+[33m74004da[m Updated from solution change by brtrick
+[33ma035030[m Updated from solution change by jessesbyers
+[33m1d1b776[m Updated from solution change by ssoonmi
+[33m4aa37e4[m Updated from solution change by ssoonmi
+[33ma881ed5[m Updated from solution change by jessesbyers
+[33m614f76e[m Updated from solution change by jessesbyers
+[33mfa11346[m Initial commit

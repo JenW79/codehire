@@ -1,0 +1,55 @@
+/* Login Modal Container */
+.login-form-container {
+    width: 350px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Form Inputs */
+.login-form input {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 3px solid #000;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Login Button (Specific to LoginFormModal) */
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ea2121;  
+    color: white;
+    border: 3px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 7px 4px 0px 0px rgb(0, 0, 0);
+}
+
+/* Active Login Button */
+.login-button:not(.disabled-login):hover {
+    background-color: #db3232;
+}
+
+/* Disabled Login Button */
+.disabled-login {
+    background-color: lightgray !important;
+    cursor: not-allowed;
+}
+
+/* Demo User Link */
+.demo-user-text {
+    margin-top: 10px;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* .demo-user-text:hover {
+    text-decoration: underline;
+} */
