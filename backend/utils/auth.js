@@ -1,9 +1,10 @@
 // backend/utils/auth.js
 const jwt = require('jsonwebtoken');
-const { jwtConfig } = require('../config');
+// const { jwtConfig } = require('../config/index');
 const { User } = require('../db/models');
 
-const { secret, expiresIn } = jwtConfig;
+const secret = process.env.JWT_SECRET;
+const expiresIn = process.env.JWT_EXPIRES_IN;
 
 // Sends a JWT Cookie
 const setTokenCookie = (res, user) => {
@@ -23,7 +24,7 @@ const setTokenCookie = (res, user) => {
   
     // Set the token cookie
     res.cookie('token', token, {
-      maxAge: expiresIn * 1000, // maxAge in milliseconds
+      maxAge: parseInt(expiresIn) * 1000, // maxAge in milliseconds
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction && "Lax"
