@@ -1,6 +1,6 @@
 // backend/models/note.js
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../../config/database");
+
 
 class Note extends Model {}
 

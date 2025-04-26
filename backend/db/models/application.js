@@ -1,6 +1,6 @@
 // backend/models/application.js
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../../config/database");
+
 
 class Application extends Model {}
 
