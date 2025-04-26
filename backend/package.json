@@ -7,7 +7,7 @@
     "sequelize-cli": "sequelize-cli",
     "start": "per-env",
     "start:development": "nodemon ./bin/www",
-    "start:production": "npx sequelize-cli db:seed:all && node ./bin/www",
+    "start:production": "NODE_ENV=production npx sequelize-cli db:migrate && NODE_ENV=production npx sequelize-cli db:seed:all && node ./bin/www",
     "build": "node psql-setup-script.js",
     "resetDb": "rm -f db/dev.db && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
