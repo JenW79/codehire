@@ -9,7 +9,7 @@
     "start:development": "nodemon ./bin/www",
     "start:production": "node ./bin/www",
     "build": "node psql-setup-script.js",
-    "migrate-and-seed": "NODE_ENV=production npx sequelize-cli db:migrate --config config/database.js && NODE_ENV=production npx sequelize-cli db:seed:all --config config/database.js",
+    "migrate-and-seed": "NODE_ENV=production npx sequelize-cli db:migrate --config config/database.js --migrations-path db/migrations && NODE_ENV=production npx sequelize-cli db:seed:all --config config/database.js --seeders-path db/seeders",
     "resetDb": "rm -f db/dev.db && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
   "keywords": [],
