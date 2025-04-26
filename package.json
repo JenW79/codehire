@@ -4,11 +4,12 @@
   "description": "Codehire: A tech job search and tracker",
   "scripts": {
     "install": "npm install --prefix backend && npm install --prefix frontend",
-    "dev:backend": "npm run --prefix backend dev",
+    "dev:backend": "npm run --prefix backend start:development",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
-    "start": "node backend/app.js", 
-    "build": "npm run --prefix frontend build"
+    "backend-setup": "npm run --prefix backend migrate-and-seed",
+    "build": "npm run --prefix frontend build",
+    "start": "npm run --prefix backend start:production"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
