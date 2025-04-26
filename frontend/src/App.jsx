@@ -12,8 +12,10 @@ function Layout() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => {
-      setIsLoaded(true)
+    dispatch(sessionActions.restoreCSRF()).then(() => {
+      dispatch(sessionActions.restoreUser()).then(() => {
+        setIsLoaded(true);
+      });
     });
   }, [dispatch]);
 

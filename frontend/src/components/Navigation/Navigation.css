@@ -1,16 +1,16 @@
 .navbar {
-  background-color: white;
+  background-color: #232222;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between; 
   align-items: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #444;
   max-width: 100%;
   width: 100%;
 }
 .logo {
   height: auto;
-  max-height: 50px;
+  max-height: 120px;
   width: auto;
   cursor: pointer;
 }
@@ -33,8 +33,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
-  border: 1px solid #ddd;
+  background-color: #3a3a3a;
+  border: 1px solid #555;
   border-radius: 25px; 
   padding: 5px 12px; 
   cursor: pointer;
@@ -58,13 +58,13 @@
 /* Adjust individual icon spacing */
 .menu-icon {
   font-size: 18px;
-  color: black;
+  color: #eee;
   margin-left: 5px;
 }
 
-.profile-icon svg { /* Ensures both icons align correctly */
+.profile-icon svg { 
   font-size: 18px;
-  color: black;
+  color: #eee;
 }
 
 
@@ -73,8 +73,8 @@
   position: absolute;
   top: 45px;
   right: 0;
-  background: white;
-  border: 2px solid black;
+  background: #2d2d2d;
+  border: 2px solid #555;
   list-style: none;
   padding: 10px;
   border-radius: 10px;
@@ -91,10 +91,11 @@
   text-align: left;
   font-size: 14px;
   font-weight: normal;
+  color: #eee;
 }
 
 .profile-dropdown li:hover {
-  background-color: #f2f2f2;
+  background-color: #3a3a3a;
 }
 
 .profile-dropdown li:first-child {
@@ -106,17 +107,7 @@
   padding-top: 5px;
 }
 
-/* Manage Spots Link */
-.manage-spots {
-  font-weight: bold;
-  padding-top: 5px;
-  color: black;
-}
 
-
-.manage-spots:hover {
-  text-decoration: underline;
-}
 
 /* Logout Button */
 .logout-button {
@@ -131,30 +122,16 @@
 }
 
 .logout-button:hover {
-  background-color: darkgrey;
+  background-color: #666;
 }
 
 .hidden {
   display: none;
 }
 
-/* Create a New Spot Link */
-.create-spot-link {
-  position: absolute;
-  right: 150px;  
-  font-weight: bold;
-  color: rgb(59, 79, 59);
-  text-decoration: none;
-}
-
-.create-spot-link:hover {
-  text-decoration: underline;
-  background-color: #f2f2f2;
-}
-
 .profile-dropdown hr {
   border: none; 
-  border-top: 1px solid black;  
+  border-top: 1px solid #555;  
   margin: 8px 0; 
   width: 100%; 
   list-style: none;  

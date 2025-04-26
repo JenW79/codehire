@@ -69,7 +69,18 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-//Restore a user
+// //Restore a user
+// export const restoreUser = () => async (dispatch) => {
+//   const response = await csrfFetch("/api/session");
+//   const data = await response.json();
+//   dispatch(setUser(data.user));
+//   return response;
+// };
+
+export const restoreCSRF = () => async () => {
+  await csrfFetch("/api/csrf/restore");
+};
+
 export const restoreUser = () => async (dispatch) => {
   const response = await csrfFetch("/api/session");
   const data = await response.json();
