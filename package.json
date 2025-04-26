@@ -2,24 +2,18 @@
   "name": "codehire",
   "version": "1.0.0",
   "description": "Codehire: A tech job search and tracker",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "install": "npm --prefix backend install backend",
-    "dev:backend": "npm install --prefix backend start",
+    "install": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "npm run --prefix backend dev",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
-    "start": "npm start --prefix backend",
-    "build": "npm run --prefix backend build"
+    "start": "node backend/app.js", 
+    "build": "npm run --prefix frontend build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2"
   }
 }
+
