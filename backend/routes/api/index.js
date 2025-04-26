@@ -26,6 +26,12 @@ router.use("/jobs", jobsRouter);
 
 router.use("/resumes", resumesRouter);
 
+// CSRF restore route
+router.get('/csrf/restore', (req, res) => {
+  res.cookie('XSRF-TOKEN', req.csrfToken());
+  return res.json({});
+});
+
 router.post("/test", (req, res) => {
   res.json({ requestBody: req.body });
 });
