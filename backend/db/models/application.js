@@ -1,6 +1,6 @@
 // backend/models/application.js
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+const sequelize = require("../../config/database");
 
 class Application extends Model {}
 
@@ -33,6 +33,7 @@ Application.init(
     modelName: "Application",
     tableName: "Applications",
     timestamps: true,
+    schema: process.env.NODE_ENV === 'production' ? process.env.SCHEMA : undefined,
   },
 
   (Application.associate = (models) => {

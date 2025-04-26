@@ -1,4 +1,8 @@
 'use strict';
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA; 
+}
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -49,7 +53,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    });
+    }, options);
   },
 
   async down (queryInterface, Sequelize) {
@@ -59,7 +63,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-      await queryInterface.dropTable('Applications');
+      await queryInterface.dropTable('Applications', options);
     
   }
 };

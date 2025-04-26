@@ -1,6 +1,6 @@
 // backend/models/note.js
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+const sequelize = require("../../config/database");
 
 class Note extends Model {}
 
@@ -25,6 +25,7 @@ Note.init(
     modelName: "Note",
     tableName: "Notes",
     timestamps: true,
+    schema: process.env.NODE_ENV === 'production' ? process.env.SCHEMA : undefined,
   },
   (Note.associate = (models) => {
     Note.belongsTo(models.Application, {
