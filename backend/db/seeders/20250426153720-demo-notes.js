@@ -22,18 +22,21 @@ module.exports = {
       [
         {
           applicationId: 1,
+          userId: 1,
           content: "Reached out via email, awaiting response.",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           applicationId: 1,
+          userId: 1,
           content: "Scheduled a technical interview for next week.",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           applicationId: 2,
+          userId: 2,
           content: "Recruiter sent coding challenge, due in 3 days.",
           createdAt: new Date(),
           updatedAt: new Date(),

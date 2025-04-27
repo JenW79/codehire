@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Note.belongsTo(models.Application, {
         foreignKey: 'applicationId',
+        as: 'Application',
       });
     }
   }
@@ -24,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: 'Users' },
+      onDelete: 'CASCADE',
+    }
   }, {
     sequelize, 
     modelName: 'Note',
