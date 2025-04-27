@@ -1,3 +1,9 @@
+# Live Demo Site
+
+[CodeHire](https://codehire-ie8o.onrender.com)
+
+---
+
 # CodeHire
 
 A full-stack job application tracker and search assistant for tech jobs. Built with Express, Sequelize, PostgreSQL, and React. Designed to help users stay organized while applying to jobs and generating resumes.
