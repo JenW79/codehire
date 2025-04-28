@@ -2,10 +2,12 @@ import { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
+import { useNavigate } from 'react-router-dom';
 import "./LoginForm.css"; 
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -15,7 +17,10 @@ function LoginFormModal() {
     e.preventDefault();
     setErrors({});
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
+      .then(() => {
+        closeModal();
+        navigate('/applications'); 
+      })
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -26,7 +31,10 @@ function LoginFormModal() {
 
   const loginAsDemoUser = () => {
     dispatch(sessionActions.login({ credential: "Demo-lition", password: "password" }))
-      .then(closeModal);
+      .then(() => {
+        closeModal();
+        navigate('/applications'); 
+      });
   };
 
   return (
@@ -53,18 +61,16 @@ function LoginFormModal() {
         {errors.credential && <p className="error-message">{errors.credential}</p>}
 
         <button 
-  type="submit" 
-  className={`login-button ${credential.length < 4 || password.length < 6 ? "disabled-login" : ""}`} 
-  disabled={credential.length < 4 || password.length < 6}
->
-  Log In
-</button>
-
+          type="submit" 
+          className={`login-button ${credential.length < 4 || password.length < 6 ? "disabled-login" : ""}`} 
+          disabled={credential.length < 4 || password.length < 6}
+        >
+          Log In
+        </button>
       </form>
 
-     
       <p className="demo-user-text" onClick={loginAsDemoUser}>
-       Log in as Demo User
+        Log in as Demo User
       </p>
     </div>
   );

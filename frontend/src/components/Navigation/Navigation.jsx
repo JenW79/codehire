@@ -7,15 +7,16 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav className="navbar">
-      <ul className="nav-links">
-        <li>
-        <img src="/logo.png" alt="Logo" /> 
-        </li>
-      </ul>
+      <div className="navbar-left">
+        <img src="/logo.png" alt="Logo" className="logo" />
+      </div>
 
-      {isLoaded && <ProfileButton user={user} />}
+      <div className="navbar-right">
+        {isLoaded && <ProfileButton user={user} />}
+      </div>
     </nav>
   );
 }
 
 export default Navigation;
+

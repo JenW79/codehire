@@ -5,29 +5,27 @@
   justify-content: space-between; 
   align-items: center;
   border-bottom: 1px solid #444;
-  max-width: 100%;
   width: 100%;
+  box-sizing: border-box;
+  height: 70px;
 }
+
 .logo {
   height: auto;
-  max-height: 120px;
-  width: auto;
+  width: 170px; 
+  object-fit: contain;
   cursor: pointer;
 }
-
-.navbar ul {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar li {
+.navbar-left {
   display: flex;
   align-items: center;
 }
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
 
 .profile-container {
   display: flex;

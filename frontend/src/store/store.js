@@ -38,8 +38,14 @@ let enhancer;
 if (import.meta.env.MODE === 'production') {
   enhancer = applyMiddleware(thunk);
 } else {
-  // Instead of await import, use require safely here
-  const logger = require('redux-logger').default;
+  let logger;
+  try {
+    logger = require('redux-logger').default;
+  } catch (error) {
+    console.warn('redux-logger not installed. Skipping logger middleware.');
+    logger = (store) => (next) => (action) => next(action); // dummy pass-through logger
+  }
+
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
@@ -49,3 +55,4 @@ const configureStore = (preloadedState) => {
 };
 
 export default configureStore;
+
