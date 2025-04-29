@@ -1,0 +1,33 @@
+.note-form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .note-form-textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    resize: vertical;
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+    font-family: inherit;
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .note-form button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .note-form button:hover {
+    background-color: #218838;
+  }
+  

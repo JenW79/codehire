@@ -5,62 +5,6 @@ const { Note } = require("../../db/models");
 const { requireAuth } = require("../../utils/auth");
 const { noteValidation } = require("../../utils/validation");
 
-// Get all notes for a job application GET /api/applications/:id/notes
-// This route retrieves all notes associated with a specific job application.
-router.get("/applications/:id/notes", requireAuth, async (req, res, next) => {
-  try {
-    const applicationId = req.params.id;
-    const notes = await Note.findAll({
-      where: { applicationId },
-      order: [
-        ["createdAt", "DESC"],
-        ["updatedAt", "DESC"],
-      ],
-    });
-    res.json(notes);
-  } catch (error) {
-    console.error("Error fetching notes:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// Add a note to a job application POST /api/applications/:id/notes
-// This route allows users to add a new note to a specific job application.
-router.post(
-  "/applications/:id/notes",
-  requireAuth,
-  noteValidation,
-  async (req, res, next) => {
-    try {
-      const { content } = req.body;
-      const applicationId = req.params.id;
-
-      if (!content) {
-        return res.status(400).json({ error: "Content is required" });
-      }
-
-      const newNote = await Note.create({
-        applicationId,
-        userId: req.user.id, 
-        content,
-      });
-
-      // Fetch the newly created note with its associated application
-      res.status(201).json({
-        id: newNote.id,
-        applicationId: newNote.applicationId,
-        userId: newNote.userId,
-        content: newNote.content,
-        createdAt: newNote.createdAt,
-        updatedAt: newNote.updatedAt,
-      });
-
-    } catch (error) {
-      console.error("Error creating note:", error);
-      res.status(500).json({ error: "Internal server error" });
-    }
-  }
-);
 
 // Update a specific note PUT api/notes/:noteId
 // This route allows users to update the content of a specific note.

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadSingleApplicationThunk, deleteApplicationThunk } from '../../store/applications';
 import { useParams, useNavigate } from 'react-router-dom';
+import NotesList from '../Notes/NotesList';
 
 function SingleApplication() {
   const { applicationId } = useParams();
@@ -20,7 +21,9 @@ function SingleApplication() {
     }
   };
 
-  if (!application) return <p>Loading application...</p>;
+  if (!application || !application.id) return <p>Loading application...</p>;
+
+
 
   return (
     <div className="single-application">
@@ -28,7 +31,7 @@ function SingleApplication() {
       <p><strong>Company:</strong> {application.companyName}</p>
       <p><strong>Status:</strong> {application.status}</p>
       <button onClick={handleDelete}>Delete Application</button>
-      {/* Later: Notes will be added down here! */}
+      <NotesList applicationId={application.id} />
     </div>
   );
 }

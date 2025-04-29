@@ -47,7 +47,7 @@ export const loadApplicationsThunk = () => async (dispatch) => {
     const res = await csrfFetch(`/api/applications/${applicationId}`);
     if (res.ok) {
       const data = await res.json();
-      dispatch(loadSingleApplication(data));
+      dispatch(loadSingleApplication(data.application));
     }
   };
   
