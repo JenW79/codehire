@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import "../LandingPage/LandingPage.css";
 
 function LandingPage() {
@@ -34,7 +35,8 @@ function LandingPage() {
       })
     )
       .then(() => {
-        navigate("/applications"); // or your dashboard
+        toast.success("Welcome back!", { autoClose: 2000 })
+        navigate("/applications"); 
       })
       .catch(async (res) => {
         const data = await res.json();

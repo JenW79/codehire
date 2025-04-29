@@ -1,0 +1,72 @@
+.application-card {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  align-items: center;
+  background-color: #2d2d2d;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.application-card:hover {
+  background-color: #444;
+  cursor: pointer;
+}
+
+.application-position,
+.application-company,
+.application-time {
+  font-weight: 500;
+  color: #f1f1f1;
+}
+
+.application-company {
+  font-style: italic;
+  color: #ccc;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Status badge colors */
+.status-applied {
+  background-color: #ddd;
+  color: #333;
+}
+
+.status-interview {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.status-offer {
+  background-color: #28a745;
+  color: white;
+}
+
+.status-pending {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.status-rejected {
+  background-color: #d9534f;
+  color: white;
+}
+
+.status-withdrawn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.application-notes {
+  text-align: center;
+  font-size: 1.5rem;
+}

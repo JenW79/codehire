@@ -55,7 +55,7 @@ router.post("/", requireAuth, applicationValidation, async (req, res, next) => {
       status,
       appliedAt,
     });
-    return res.status(201).json({ application: newApplication });
+    return res.status(201).json({ newApplication });
   } catch (error) {
     console.error("Error creating application:", error);
     return res.status(500).json({ message: "Internal server error" });

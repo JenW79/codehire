@@ -1,0 +1,87 @@
+/* ApplicationsList.css */
+
+.applications-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.application-form-wrapper {
+  background-color: #2d2d2d;
+  padding: 30px;
+  border-radius: 20px;
+  width: 300px;
+  color: #f1f1f1;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.application-form-wrapper h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.application-form-wrapper input,
+.application-form-wrapper select {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  text-decoration: none;
+}
+
+.application-form-wrapper input::placeholder {
+  color: #aaa;
+}
+
+.application-form-wrapper button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff6600;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.application-form-wrapper button:hover {
+  background-color: #e65c00;
+}
+
+.application-headers {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+.applications-list h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.applications-container {
+  background-color: #3a3a3a;
+  border-radius: 20px;
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+.application-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

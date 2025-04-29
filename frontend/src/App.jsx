@@ -5,8 +5,6 @@
 // import * as sessionActions from './store/session';
 // import LandingPage from "./components/LandingPage/LandingPage";
 
-
-
 // function Layout() {
 //   const dispatch = useDispatch();
 //   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,10 +29,10 @@
 //   {
 //     element: <Layout />,
 //     children: [
-//       { path: '/', 
-//         element: <LandingPage /> 
+//       { path: '/',
+//         element: <LandingPage />
 //       },
-      
+
 //     ],
 //   },
 // ]);
@@ -45,13 +43,21 @@
 
 // export default App;
 
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Navigation from './components/Navigation/Navigation';
-import * as sessionActions from './store/session';
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Outlet, createBrowserRouter, RouterProvider } from "react-router-dom";
+import * as sessionActions from "./store/session";
+import { ModalProvider } from "./context/Modal";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+import ApplicationsList from "./components/Applications/ApplicationsList";
+import SingleApplication from "./components/Applications/SingleApplication";
+import ApplicationFormWrapper from "./components/Applications/ApplicationFormWrapper";
 import LandingPage from "./components/LandingPage/LandingPage";
-import { ModalProvider } from './context/Modal'; // <<< ADDED THIS
+import Navigation from "./components/Navigation/Navigation";
+
 
 function Layout() {
   const dispatch = useDispatch();
@@ -66,8 +72,9 @@ function Layout() {
   }, [dispatch]);
 
   return (
-    <ModalProvider> {/* <<< WRAP everything inside ModalProvider */}
+    <ModalProvider>
       <Navigation isLoaded={isLoaded} />
+      <ToastContainer />
       {isLoaded && <Outlet />}
     </ModalProvider>
   );
@@ -79,8 +86,16 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <LandingPage />,
+      },
+     
+      { path: "/applications", element: <ApplicationsList /> },
+      { path: "/applications/new", element: <ApplicationFormWrapper /> },
+      { path: "/applications/:applicationId", element: <SingleApplication /> },
+      {
+        path: "/applications/:applicationId/edit",
+        element: <ApplicationFormWrapper />,
       },
       // Add more routes here later like /applications, etc.
     ],

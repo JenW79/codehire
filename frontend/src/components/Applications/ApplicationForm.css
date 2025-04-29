@@ -1,0 +1,43 @@
+/* ApplicationForm.css */
+
+.application-form-container {
+    background-color: #3a3a3a;
+    padding: 30px;
+    border-radius: 20px;
+    width: 300px;
+    margin: 0 auto;
+    color: #f1f1f1;
+  }
+  
+  .application-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .application-form-container input,
+  .application-form-container select {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2d2d2d;
+    color: #f1f1f1;
+  }
+  
+  .application-form-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff6600;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.3s;
+  }
+  
+  .application-form-container button:hover {
+    background-color: #e65c00;
+  }
+  
