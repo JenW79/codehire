@@ -22,17 +22,18 @@ function NotesList({ applicationId }) {
   return (
     <div className="notes-section">
       <h2>Notes</h2>
-      <NoteForm applicationId={applicationId} />
       <div className="notes-list">
-        {notes.length === 0 && <p>No notes yet. Add one above!</p>}
+        {notes.length === 0 && <p>No notes yet. Add one below!</p>}
         {notes.map(note => (
           <NoteCard key={note.id} note={note} />
         ))}
       </div>
+      <NoteForm applicationId={applicationId} />
     </div>
   );
 }
 
 export default NotesList;
+
 
 

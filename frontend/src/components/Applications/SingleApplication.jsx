@@ -7,6 +7,7 @@ import {
 import EditApplicationModal from "./EditApplicationModal";
 import { useParams, useNavigate } from "react-router-dom";
 import NotesList from "../Notes/NotesList";
+import "./SingleApplication.css"; 
 
 function SingleApplication() {
   const { applicationId } = useParams();
@@ -31,16 +32,16 @@ function SingleApplication() {
   if (!application || !application.id) return <p>Loading application...</p>;
 
   return (
-    <div className="single-application">
-      <h1>{application.positionTitle}</h1>
-      <p>
-        <strong>Company:</strong> {application.companyName}
-      </p>
-      <p>
-        <strong>Status:</strong> {application.status}
-      </p>
-      <div className="application-controls">
-        <button onClick={() => setShowEditModal(true)}>Edit Application</button>
+    <div className="single-application-wrapper">
+      <div className="application-card">
+        <h2>{application.positionTitle}</h2>
+        <p><strong>Company:</strong> {application.companyName}</p>
+        <p><strong>Status:</strong> {application.status}</p>
+
+        <div className="application-controls">
+          <button onClick={() => setShowEditModal(true)}>Edit</button>
+          <button className="back-btn" onClick={() => navigate("/applications")}>Back to Tracker</button>
+        </div>
       </div>
 
       <NotesList applicationId={application.id} />
@@ -56,3 +57,4 @@ function SingleApplication() {
 }
 
 export default SingleApplication;
+

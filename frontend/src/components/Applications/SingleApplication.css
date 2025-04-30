@@ -1,0 +1,66 @@
+.single-application-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    color: #f1f1f1;
+  }
+  
+  .application-card {
+    background-color: #2d2d2d;
+    border-radius: 15px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+  }
+  
+  .application-card h2 {
+    font-size: 1.75rem;
+    margin-bottom: 12px;
+  }
+  
+  .application-card p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  
+  .application-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  
+  .application-controls button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .application-controls .edit-btn {
+      background-color: #ff6600;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  
+  .application-controls .back-btn {
+    background-color: #555;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .application-controls.edit-btn:hover {
+    background-color: #e65c00
+  }
+  .application-controls.back-btn:hover {
+    background-color: #444;
+  }
