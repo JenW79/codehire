@@ -1,4 +1,5 @@
-
+import ProtectedRoute from "./utils/ProtectedRoute";
+import LandingOrRedirect from "./utils/LandingOrRedirect";
 
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -8,14 +9,11 @@ import { ModalProvider } from "./context/Modal";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
 import ApplicationsList from "./components/Applications/ApplicationsList";
 import SingleApplication from "./components/Applications/SingleApplication";
 import ApplicationFormWrapper from "./components/Applications/ApplicationFormWrapper";
-// import LandingPage from "./components/LandingPage/LandingPage";
 import Navigation from "./components/Navigation/Navigation";
-import LandingOrRedirect from "./components/LandingOrRedirect";
+
 
 
 function Layout() {
@@ -48,18 +46,43 @@ const router = createBrowserRouter([
         path: "/",
         element: <LandingOrRedirect />,
       },
-     
-      { path: "/applications", element: <ApplicationsList /> },
-      { path: "/applications/new", element: <ApplicationFormWrapper /> },
-      { path: "/applications/:applicationId", element: <SingleApplication /> },
+
+      {
+        path: "/applications",
+        element: (
+          <ProtectedRoute>
+            <ApplicationsList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/applications/new",
+        element: (
+          <ProtectedRoute>
+            <ApplicationFormWrapper />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/applications/:applicationId",
+        element: (
+          <ProtectedRoute>
+            <SingleApplication />
+          </ProtectedRoute>
+        ),
+      },
       {
         path: "/applications/:applicationId/edit",
-        element: <ApplicationFormWrapper />,
+        element: (
+          <ProtectedRoute>
+            <ApplicationFormWrapper />
+          </ProtectedRoute>
+        ),
       },
-      // Add more routes here later like /applications, etc.
     ],
   },
 ]);
+
 
 // App Component
 function App() {
