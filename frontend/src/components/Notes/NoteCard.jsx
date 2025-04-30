@@ -13,8 +13,10 @@ function NoteCard({ note }) {
       await dispatch(deleteNoteThunk(note.id));
     }
   };
-  const handleUpdate = async () => {
-    await dispatch(updateNoteThunk(note.id, { content }));
+
+  const handleSave = async () => {
+    if (content.trim() === '') return;
+    await dispatch(updateNoteThunk(note.applicationId, note.id, { content })); // ✅ correct args
     setEditing(false);
   };
 
@@ -32,8 +34,11 @@ function NoteCard({ note }) {
             className="note-textarea"
           />
           <div className="note-actions">
-            <button onClick={handleUpdate}>Save</button>
-            <button onClick={() => setEditing(false)}>Cancel</button>
+            <button onClick={handleSave}>Save</button>
+            <button onClick={() => {
+              setContent(note.content); 
+              setEditing(false);
+            }}>Cancel</button>
           </div>
         </div>
       ) : (

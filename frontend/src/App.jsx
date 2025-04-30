@@ -1,47 +1,4 @@
-// import { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
-// import Navigation from './components/Navigation/Navigation';
-// import * as sessionActions from './store/session';
-// import LandingPage from "./components/LandingPage/LandingPage";
 
-// function Layout() {
-//   const dispatch = useDispatch();
-//   const [isLoaded, setIsLoaded] = useState(false);
-
-//   useEffect(() => {
-//     dispatch(sessionActions.restoreCSRF()).then(() => {
-//       dispatch(sessionActions.restoreUser()).then(() => {
-//         setIsLoaded(true);
-//       });
-//     });
-//   }, [dispatch]);
-
-//   return (
-//     <>
-//       <Navigation isLoaded={isLoaded} />
-//       {isLoaded && <Outlet />}
-//     </>
-//   );
-// }
-
-// const router = createBrowserRouter([
-//   {
-//     element: <Layout />,
-//     children: [
-//       { path: '/',
-//         element: <LandingPage />
-//       },
-
-//     ],
-//   },
-// ]);
-
-// function App() {
-//   return <RouterProvider router={router} />;
-// }
-
-// export default App;
 
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -52,11 +9,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 import ApplicationsList from "./components/Applications/ApplicationsList";
 import SingleApplication from "./components/Applications/SingleApplication";
 import ApplicationFormWrapper from "./components/Applications/ApplicationFormWrapper";
-import LandingPage from "./components/LandingPage/LandingPage";
+// import LandingPage from "./components/LandingPage/LandingPage";
 import Navigation from "./components/Navigation/Navigation";
+import LandingOrRedirect from "./components/LandingOrRedirect";
 
 
 function Layout() {
@@ -87,7 +46,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <LandingPage />,
+        element: <LandingOrRedirect />,
       },
      
       { path: "/applications", element: <ApplicationsList /> },
