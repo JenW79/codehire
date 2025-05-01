@@ -2,12 +2,16 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { useModal } from "../../context/Modal";
+import { toast } from "react-toastify";
+
+import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import "../LandingPage/LandingPage.css";
 
 function LandingPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { setModalContent } = useModal();
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -35,8 +39,8 @@ function LandingPage() {
       })
     )
       .then(() => {
-        toast.success("Welcome back!", { autoClose: 2000 })
-        navigate("/applications"); 
+        toast.success("Welcome back!", { autoClose: 2000 });
+        navigate("/applications");
       })
       .catch(async (res) => {
         const data = await res.json();
@@ -51,7 +55,14 @@ function LandingPage() {
       <div className="left-side">
         <h1>Join now</h1>
         <p className="login-link">
-          Already Registered? <span className="link-span">Login</span>
+          Already Registered?{" "}
+          <span
+            className="link-span"
+            onClick={() => setModalContent(<LoginFormModal />)}
+            style={{ cursor: "pointer" }}
+          >
+            Login
+          </span>
         </p>
         <div className="divider"></div>
         <p className="info-text">

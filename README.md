@@ -1,6 +1,6 @@
 # Live Demo Site
 
-[CodeHire](https://codehire-ie8o.onrender.com)
+https://codehire-ie8o.onrender.com
 
 ---
 

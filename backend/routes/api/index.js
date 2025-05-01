@@ -8,6 +8,7 @@ const applicationsRouter = require("./applications");
 const notesRouter = require("./notes");
 const jobsRouter = require("./jobs");
 const resumesRouter = require("./resumes");
+const savedJobsRouter = require('./savedJobs');
 
 // Connect restoreUser middleware to the API router
 // If current user session is valid, set req.user to the user in the database
@@ -25,6 +26,8 @@ router.use("/", notesRouter); // notes are nested under applications
 router.use("/jobs", jobsRouter);
 
 router.use("/resumes", resumesRouter);
+
+router.use('/saved-jobs', savedJobsRouter);
 
 // CSRF restore route
 router.get('/csrf/restore', (req, res) => {

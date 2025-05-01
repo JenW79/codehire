@@ -2,12 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { FaUserCircle } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
+import { useNavigate, NavLink } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
-// import { NavLink } from "react-router-dom";
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal/LoginFormModal';
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
-import { useNavigate } from "react-router-dom";
+import './ProfileButton.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -15,13 +15,11 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
-  
   const toggleMenu = (e) => {
     e.stopPropagation();
-    setShowMenu((prev) => !prev);
+    setShowMenu(prev => !prev);
   };
 
- 
   useEffect(() => {
     if (!showMenu) return;
 
@@ -35,14 +33,13 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener('click', closeMenu);
   }, [showMenu]);
 
-  
   const closeMenu = () => setShowMenu(false);
 
   const logout = async (e) => {
     e.preventDefault();
-    await dispatch(sessionActions.logout()); 
+    await dispatch(sessionActions.logout());
     closeMenu();
-    navigate("/");
+    navigate('/');
   };
 
   const ulClassName = `profile-dropdown ${showMenu ? '' : 'hidden'}`;
@@ -50,31 +47,27 @@ function ProfileButton({ user }) {
   return (
     <div className="profile-container">
       <button onClick={toggleMenu} className="profile-icon">
-        <FiMenu size={24} className="menu-icon" /> 
+        <FiMenu size={24} className="menu-icon" />
         <FaUserCircle size={24} className="profile-icon" />
       </button>
       {showMenu && (
         <ul className={ulClassName} ref={ulRef}>
           {user ? (
             <>
-              <li> Hello, {user.username || "Guest"}</li>
-              <li>{user.email || "No Email"}</li>
-              <hr className="solid" />
-              <hr className="solid" />
-              <li>
-                <button className="logout-button" onClick={logout}>Log Out</button>
-              </li>
+              <li className="dropdown-welcome">Hello, {user.username}</li>
+              <li><NavLink to="/applications" onClick={closeMenu}>View Applications</NavLink></li>
+              <li><button className="logout-button" onClick={logout}>Logout</button></li>
             </>
           ) : (
             <>
               <OpenModalMenuItem
                 itemText="Log In"
-                onItemClick={closeMenu} 
+                onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
               <OpenModalMenuItem
                 itemText="Sign Up"
-                onItemClick={closeMenu} 
+                onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
             </>
@@ -86,3 +79,4 @@ function ProfileButton({ user }) {
 }
 
 export default ProfileButton;
+
