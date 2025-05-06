@@ -4,6 +4,7 @@ const axios = require("axios");
 const NodeCache = require("node-cache");
 require("dotenv").config();
 const normalizeJob = require("../../utils/normalizeJob");
+const { requireAuth } = require("../../utils/auth");
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -12,7 +13,7 @@ const remotiveCache = new NodeCache({ stdTTL: 86400 });
 const jobCache = new NodeCache({ stdTTL: 86400 });
 
 //GET /api/jobs/search	Unified search (Remotive/JSearch)
-router.get("/search", async (req, res) => {
+router.get("/search", requireAuth, async (req, res) => {
   const { query, location = "remote", page = 1 } = req.query;
   const isRemote = location.toLowerCase() === "remote";
   const cleanQuery = query?.toLowerCase().trim() || "developer";
@@ -69,7 +70,7 @@ router.get("/search", async (req, res) => {
 });
 
 //GET /api/jobs/:source/:id	View individual job details
-router.get("/jobs/:source/:id", async (req, res) => {
+router.get("/jobs/:source/:id", requireAuth, async (req, res) => {
   const { source, id } = req.params;
   const cacheKey = `job:${source}:${id}`;
   const cached = jobCache.get(cacheKey);

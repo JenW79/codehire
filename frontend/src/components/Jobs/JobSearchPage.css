@@ -1,0 +1,33 @@
+.job-search-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px 60px;
+    color: #f1f1f1;
+    gap: 40px;
+  }
+  
+  .job-search-left {
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  .job-search-right {
+    flex: 2;
+    width: 100%;
+  }
+  
+  .job-page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #f1f1f1;
+  }
+  
+  .job-page-subtitle {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    color: #ccc;
+  }
+  

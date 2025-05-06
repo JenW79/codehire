@@ -6,11 +6,13 @@ import { thunk } from 'redux-thunk';
 import sessionReducer from './session';
 import applicationsReducer from './applications'; 
 import notesReducer from './notes';
+import jobsReducer from './jobs';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   applications: applicationsReducer,
   notes: notesReducer,
+  jobs: jobsReducer,
   // add more reducers here as needed
 });
 

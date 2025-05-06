@@ -13,6 +13,7 @@ import ApplicationsList from "./components/Applications/ApplicationsList";
 import SingleApplication from "./components/Applications/SingleApplication";
 import ApplicationFormWrapper from "./components/Applications/ApplicationFormWrapper";
 import Navigation from "./components/Navigation/Navigation";
+import JobSearchPage from "./components/Jobs/JobsSearchPage";
 
 
 
@@ -79,6 +80,30 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/applications/:applicationId/delete",
+        element: (
+          <ProtectedRoute>
+            <ApplicationFormWrapper />
+          </ProtectedRoute>
+        ),
+      },
+      { 
+        path: "/jobs",
+        element: (
+          <ProtectedRoute>
+            <JobSearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      // {
+      //   path: "/jobs/:jobId",
+      //   element: (
+      //     <ProtectedRoute>
+      //       <JobDetailPage />
+      //     </ProtectedRoute>
+      //   ),
+      // },
     ],
   },
 ]);

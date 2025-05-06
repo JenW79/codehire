@@ -1,0 +1,35 @@
+.job-search-form {
+    background-color: #3e3e3e;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 400px;
+    margin: auto;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .job-search-form input {
+    width: 90%;
+    padding: 12px 16px;
+    margin: 10px 0;
+    border-radius: 25px;
+    border: none;
+    background: #5c5c5c;
+    color: #fff;
+  }
+  
+  .job-search-form button {
+    background-color: orange;
+    color: #000;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .job-search-form button:hover {
+    background-color: #ffa733;
+  }
+  
