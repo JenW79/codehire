@@ -22,14 +22,20 @@ function SingleApplication() {
     dispatch(loadSingleApplicationThunk(applicationId));
   }, [dispatch, applicationId]);
 
-  const handleDelete = async () => {
-    if (window.confirm("Are you sure you want to delete this application?")) {
-      await dispatch(deleteApplicationThunk(applicationId));
-      navigate("/applications");
-    }
-  };
+  // const handleDelete = async () => {
+  //   if (window.confirm("Are you sure you want to delete this application?")) {
+  //     await dispatch(deleteApplicationThunk(applicationId));
+  //     navigate("/applications");
+  //   }
+  // };
 
-  if (!application || !application.id) return <p>Loading application...</p>;
+  if (application === null) {
+    return <p className="error-message">Application not found.</p>;
+  }
+  
+  if (!application || !application.id) {
+    return <p>Loading application...</p>;
+  }
 
   return (
     <div className="single-application-wrapper">

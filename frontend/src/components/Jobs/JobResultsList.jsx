@@ -1,15 +1,17 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import JobDetailModal from "./JobDetailModal";
 import "./JobResultsList.css";
-import { Link } from "react-router-dom";
 
 function JobResultsList() {
   const jobs = useSelector((state) => state.jobs.listings);
   const loading = useSelector((state) => state.jobs.loading);
   const error = useSelector((state) => state.jobs.error);
   const source = useSelector((state) => state.jobs.source);
+  const [selectedJob, setSelectedJob] = useState(null);
 
-  if (loading) return <p>Loading jobs...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p className="job-empty-message">Loading jobs...</p>;
+  if (error) return <p className="job-empty-message">Error: {error}</p>;
   if (!jobs.length)
     return (
       <p className="job-empty-message">No jobs found yet. Try a search!</p>
@@ -36,12 +38,22 @@ function JobResultsList() {
               : "Date Unknown"}
           </small>
           <div>
-            <Link to={`/jobs/${job.id}`} className="job-details-link">
+            <button
+              type="button"
+              onClick={() => setSelectedJob(job)}
+              className="job-details-link"
+            >
               Details
-            </Link>
+            </button>
           </div>
         </div>
       ))}
+      {selectedJob && (
+        <JobDetailModal
+          job={selectedJob}
+          onClose={() => setSelectedJob(null)}
+        />
+      )}
     </div>
   );
 }

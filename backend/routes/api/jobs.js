@@ -21,9 +21,20 @@ router.get("/search", requireAuth, async (req, res) => {
   // Dev-only mock mode
   if (isDev && process.env.USE_MOCK_JOBS === "true") {
     const mock = require("../mocks/mockJobs.json");
-    const normalized = mock.map((job) =>
-      normalizeJob(job, job.source || "mock")
-    );
+    const normalized = mock
+      .map((job) => normalizeJob(job, job.source || "remotive"))
+      .filter(
+        (job) =>
+          job.title.toLowerCase().includes(cleanQuery) ||
+          job.company.toLowerCase().includes(cleanQuery)
+      );
+
+    if (!normalized.length) {
+      return res
+        .status(404)
+        .json({ error: "No mock jobs found for that keyword." });
+    }
+
     return res.json({ source: "mock", results: normalized });
   }
 
@@ -41,9 +52,19 @@ router.get("/search", requireAuth, async (req, res) => {
         params: { search: cleanQuery },
       });
 
-      const jobs = response.data.jobs.map((job) =>
-        normalizeJob(job, "remotive")
-      );
+      const jobs = response.data.jobs
+        .map((job) => normalizeJob(job, "remotive"))
+        .filter(
+          (job) =>
+            job.title.toLowerCase().includes(cleanQuery) ||
+            job.company.toLowerCase().includes(cleanQuery)
+        );
+
+      if (jobs.length === 0) {
+        return res
+          .status(404)
+          .json({ error: "No jobs found for that keyword." });
+      }
       remotiveCache.set(cacheKey, jobs);
       return res.json({ source: "remotive", results: jobs });
     }
@@ -61,7 +82,17 @@ router.get("/search", requireAuth, async (req, res) => {
       },
     });
 
-    const jobs = response.data.data.map((job) => normalizeJob(job, "jsearch"));
+    const jobs = response.data.data
+      .map((job) => normalizeJob(job, "jsearch"))
+      .filter(
+        (job) =>
+          job.title.toLowerCase().includes(cleanQuery) ||
+          job.company.toLowerCase().includes(cleanQuery)
+      );
+
+    if (!jobs.length) {
+      return res.status(404).json({ error: "No jobs found for that keyword." });
+    }
     return res.json({ source: "jsearch", results: jobs });
   } catch (err) {
     console.error(" Job search failed:", err.message);
@@ -76,7 +107,7 @@ router.get("/jobs/:source/:id", requireAuth, async (req, res) => {
   const cached = jobCache.get(cacheKey);
 
   if (cached) {
-    console.log(" Loaded job from cache");
+    console.log("Loaded job from cache");
     return res.json(cached);
   }
 

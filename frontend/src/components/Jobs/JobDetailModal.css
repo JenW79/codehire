@@ -1,0 +1,55 @@
+.job-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(20, 20, 20, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .job-modal {
+    background: #3e3e3e;
+    border-radius: 20px;
+    padding: 30px;
+    width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #f1f1f1;
+  }
+  
+  .job-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .job-detail-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  
+  .job-detail-actions a,
+  .job-detail-actions button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .job-detail-actions a {
+    background-color: orange;
+    color: #000;
+  }
+  
+  .job-detail-actions button {
+    background-color: #666;
+    color: #fff;
+  }
+  

@@ -44,10 +44,14 @@ export const loadApplicationsThunk = () => async (dispatch) => {
   };
   
   export const loadSingleApplicationThunk = (applicationId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/applications/${applicationId}`);
-    if (res.ok) {
+    try {
+      const res = await csrfFetch(`/api/applications/${applicationId}`);
+      if (!res.ok) throw new Error("Application not found");
+  
       const data = await res.json();
       dispatch(loadSingleApplication(data.application));
+    } catch (err) {
+      dispatch(loadSingleApplication(null)); 
     }
   };
   

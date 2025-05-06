@@ -1,16 +1,18 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchJobsThunk } from "../../store/jobs"
-import './JobSearchForm.css';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchJobsThunk, clearJobsError} from "../../store/jobs";
+import "./JobSearchForm.css";
 
 function JobSearchForm() {
   const dispatch = useDispatch();
-  const [query, setQuery] = useState('');
-  const [location, setLocation] = useState('remote');
+  const [query, setQuery] = useState("");
+  const [location, setLocation] = useState("remote");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
+    
+    dispatch(clearJobsError());
     dispatch(fetchJobsThunk({ query, location }));
   };
   return (
@@ -27,7 +29,9 @@ function JobSearchForm() {
         value={location}
         onChange={(e) => setLocation(e.target.value)}
       />
-      <button type="submit">Search Jobs</button>
+      <button type="submit" disabled={query.length < 3}>
+        Search Jobs
+      </button>
     </form>
   );
 }
