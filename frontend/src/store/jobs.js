@@ -79,7 +79,15 @@ export const fetchJobsThunk =
   export const saveJobThunk = (job) => async (dispatch) => {
     const res = await csrfFetch('/api/saved-jobs', {
       method: 'POST',
-      body: JSON.stringify(job),
+    body: JSON.stringify({
+      jobId: job.id,        
+      source: job.source,
+      title: job.title,
+      company: job.company,
+      location: job.location,
+      applyUrl: job.applyUrl,
+    }),
+
     });
   
     if (res.ok) {

@@ -12,15 +12,17 @@ router.get("/", requireAuth, async (req, res) => {
 
 // POST save a job /saved-jobs
 router.post("/", requireAuth, async (req, res) => {
-    const userId = req.user.id;
-    const { jobId, source, title, company, location, applyUrl } = req.body;
-  
+  const userId = req.user.id;
+ 
+  const { jobId, source, title, company, location, applyUrl } = req.body;
+
+  try {
     const existing = await SavedJob.findOne({
       where: { userId, jobId, source },
     });
-  
+
     if (existing) return res.status(400).json({ error: "Already saved" });
-  
+
     const saved = await SavedJob.create({
       userId,
       jobId,
@@ -30,9 +32,12 @@ router.post("/", requireAuth, async (req, res) => {
       location,
       applyUrl,
     });
-  
+
     res.status(201).json(saved);
-  });
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
   // DELETE a saved job /savedJobs/:id
 router.delete("/:id", requireAuth, async (req, res) => {

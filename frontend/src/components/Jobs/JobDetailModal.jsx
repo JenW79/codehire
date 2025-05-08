@@ -3,7 +3,9 @@ import { saveJobThunk, unsaveJobThunk } from "../../store/jobs";
 
 import "./JobDetailModal.css";
 
-const dispatch = useDispatch();
+
+function JobDetailModal({ job, onClose }) {
+  const dispatch = useDispatch();
 const savedJobs = useSelector((state) => state.jobs.saved);
 const savedRecord = job ? savedJobs[job.id] : null;
 
@@ -14,8 +16,6 @@ const handleToggleSave = () => {
     dispatch(saveJobThunk(job)); // normalized job already has title, location, etc.
   }
 };
-
-function JobDetailModal({ job, onClose }) {
   if (job === null) {
     return (
       <div className="job-modal-overlay" onClick={onClose}>
