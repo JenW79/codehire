@@ -1,4 +1,8 @@
 'use strict';
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA; 
+}
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -12,7 +16,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('SavedJobs', [
+    options.tableName = 'SavedJobs';
+    return queryInterface.bulkInsert(options, [
       {
         userId: 1,
         jobId: 'D7FDM6ekNhPC_BCVAAAAAA==', // match mock
@@ -47,6 +52,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    return queryInterface.bulkDelete('SavedJobs', null, {});
+    options.tableName = 'SavedJobs';
+    return queryInterface.bulkDelete(options, null, {});
   }
 };

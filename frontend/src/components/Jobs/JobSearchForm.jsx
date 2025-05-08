@@ -11,7 +11,7 @@ function JobSearchForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
-    
+
     dispatch(clearJobsError());
     dispatch(fetchJobsThunk({ query, location }));
   };
@@ -25,7 +25,7 @@ function JobSearchForm() {
       />
       <input
         type="text"
-        placeholder="Location (e.g. Remote, New York)"
+        placeholder="Location (e.g. Remote, California)"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
       />
