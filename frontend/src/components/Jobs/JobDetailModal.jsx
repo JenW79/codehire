@@ -4,23 +4,28 @@ import { useEffect } from "react";
 
 import "./JobDetailModal.css";
 
-
 function JobDetailModal({ job, onClose }) {
-const dispatch = useDispatch();
-const savedJobs = useSelector((state) => state.jobs.saved);
-const savedRecord = job && savedJobs[job.id];
+  const dispatch = useDispatch();
+  const savedJobs = useSelector((state) => state.jobs.saved);
+  const savedRecord = job && (savedJobs[job.jobId] || savedJobs[job.id]);
 
-useEffect(() => {
-  dispatch(fetchSavedJobs());
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchSavedJobs());
+  }, [dispatch]);
 
-const handleToggleSave = () => {
-  if (savedRecord) {
-    dispatch(unsaveJobThunk(savedRecord.id)); // backend needs saved record ID
-  } else {
-    dispatch(saveJobThunk(job)); // normalized job already has title, location, etc.
-  }
-};
+  useEffect(() => {
+  document.body.classList.add("modal-open");
+  return () => document.body.classList.remove("modal-open");
+}, []);
+
+
+  const handleToggleSave = () => {
+    if (savedRecord) {
+      dispatch(unsaveJobThunk(savedRecord.id)); // backend needs saved record ID
+    } else {
+      dispatch(saveJobThunk(job)); // normalized job already has title, location, etc.
+    }
+  };
   if (job === null) {
     return (
       <div className="job-modal-overlay" onClick={onClose}>
@@ -33,14 +38,23 @@ const handleToggleSave = () => {
   }
 
   if (!job) return null;
-
+  const plainDescription = job.description
+  ? job.description
+      .replace(/<\/(div|p|h\d|li|ul|br)>/gi, "\n")
+      .replace(/<[^>]+>/g, "")
+      .trim()
+  : "No job description available.";
   return (
     <div className="job-modal-overlay" onClick={onClose}>
       <div className="job-modal" onClick={(e) => e.stopPropagation()}>
         <h2>Job Details</h2>
         <div className="job-detail-header">
           <h3>{job.title}</h3>
-          <span>{new Date(job.datePosted).toLocaleDateString()}</span>
+          <span>
+            {job.datePosted
+              ? new Date(job.datePosted).toLocaleDateString()
+              : "Date Unknown"}
+          </span>
         </div>
         <p>
           <strong>Company:</strong> {job.company}
@@ -51,7 +65,7 @@ const handleToggleSave = () => {
         <p>
           <strong>Description:</strong>
         </p>
-        <p>{job.description}</p>
+        <pre className="job-description">{plainDescription}</pre>
         <div className="job-detail-actions">
           <a href={job.applyUrl} target="_blank" rel="noreferrer">
             Apply

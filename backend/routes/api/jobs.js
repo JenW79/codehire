@@ -6,7 +6,7 @@ require("dotenv").config();
 const normalizeJob = require("../../utils/normalizeJob");
 const { requireAuth } = require("../../utils/auth");
 
-const isDev = process.env.NODE_ENV === "development";
+
 
 // Cache instance (24 hours)
 const remotiveCache = new NodeCache({ stdTTL: 86400 });
@@ -17,26 +17,6 @@ router.get("/search", requireAuth, async (req, res) => {
   const { query, location = "remote", page = 1 } = req.query;
   const isRemote = location.toLowerCase() === "remote";
   const cleanQuery = query?.toLowerCase().trim() || "developer";
-
-  // Dev-only mock mode
-  if (isDev && process.env.USE_MOCK_JOBS === "true") {
-    const mock = require("../mocks/mockJobs.json");
-    const normalized = mock
-      .map((job) => normalizeJob(job, job.source || "remotive"))
-      .filter(
-        (job) =>
-          job.title.toLowerCase().includes(cleanQuery) ||
-          job.company.toLowerCase().includes(cleanQuery)
-      );
-
-    if (!normalized.length) {
-      return res
-        .status(404)
-        .json({ error: "No mock jobs found for that keyword." });
-    }
-
-    return res.json({ source: "mock", results: normalized });
-  }
 
   try {
     if (isRemote) {

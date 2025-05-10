@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchJobsThunk, clearJobsError} from "../../store/jobs";
+import { fetchJobsThunk, clearJobs, clearJobsError } from "../../store/jobs";
 import "./JobSearchForm.css";
 
 function JobSearchForm() {
@@ -11,7 +11,8 @@ function JobSearchForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
-
+     
+    dispatch(clearJobs());
     dispatch(clearJobsError());
     dispatch(fetchJobsThunk({ query, location }));
   };

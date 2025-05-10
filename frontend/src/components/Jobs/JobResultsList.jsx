@@ -20,7 +20,7 @@ function JobResultsList() {
   return (
     <div className="job-results-list">
       <h3>
-        Showing {jobs.length} results from {source}
+        Showing {jobs.length} results
       </h3>
       {jobs.map((job) => (
         <div key={job.id} className="job-card">

@@ -62,6 +62,7 @@
 .saved-job-actions {
   display: flex;
   align-items: center;
+  gap: 12px;
   font-size: 0.95rem;
 }
 

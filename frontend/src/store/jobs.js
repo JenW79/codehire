@@ -86,6 +86,8 @@ export const fetchJobsThunk =
       company: job.company,
       location: job.location,
       applyUrl: job.applyUrl,
+      description: job.description,
+      datePosted: job.datePosted,
     }),
 
     });
@@ -115,6 +117,7 @@ const initialState = {
   saved: {},
   source: null,
   error: null,
+  loading: false,
 };
 
 // REDUCER
@@ -126,6 +129,7 @@ export default function jobsReducer(state = initialState, action) {
         listings: action.listings,
         source: action.source,
         error: null,
+        loading: false,
       };
     case CLEAR_JOBS:
       return {
@@ -133,11 +137,13 @@ export default function jobsReducer(state = initialState, action) {
         listings: [],
         source: null,
         error: null,
+        loading: true,
       };
     case JOBS_ERROR:
       return {
         ...state,
         error: action.error,
+        loading: false,
       };
     case CLEAR_JOBS_ERROR:
       return {
