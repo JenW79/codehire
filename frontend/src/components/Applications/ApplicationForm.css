@@ -29,7 +29,7 @@
   .application-form-container button {
     width: 100%;
     padding: 12px;
-    background-color: #ff6600;
+    background-color: #d77c13;
     border: none;
     border-radius: 8px;
     color: #fff;
@@ -39,7 +39,7 @@
   }
   
   .application-form-container button:hover {
-    background-color: #e65c00;
+    background-color: #e46615;
   }
 
 /* responsive */

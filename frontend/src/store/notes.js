@@ -34,17 +34,18 @@ export const loadNotesThunk = (applicationId) => async (dispatch) => {
     }
   }
 
-  export const updateNoteThunk = (applicationId, noteId, noteData) => async (dispatch) => {
-    const res = await csrfFetch(`/api/applications/${applicationId}/notes/${noteId}`, {
-      method: 'PUT',
-      body: JSON.stringify(noteData),
-    });
-    if (res.ok) {
-      const note = await res.json();
-      dispatch(updateNote(note));
-      return note;
-    }
+  export const updateNoteThunk = (noteId, noteData) => async (dispatch) => {
+  const res = await csrfFetch(`/api/notes/${noteId}`, {
+    method: 'PUT',
+    body: JSON.stringify(noteData),
+  });
+
+  if (res.ok) {
+    const note = await res.json();
+    dispatch(updateNote(note));
+    return note;
   }
+};
 
   export const deleteNoteThunk = (noteId) => async (dispatch) => {
     const res = await csrfFetch(`/api/notes/${noteId}`, {
@@ -57,38 +58,67 @@ export const loadNotesThunk = (applicationId) => async (dispatch) => {
 
 // Initial State
 const initialState = {
-    notes: {},
+    notesByApplication: {},
 };
 
 // Reducer
 export default function notesReducer(state = initialState, action) {
-    switch (action.type) {
-      case LOAD_NOTES: {
-        const newState = { notes: {} };
-        if (Array.isArray(action.notes)) {
-          action.notes.forEach(note => {
-            newState.notes[note.id] = note;
-          });
+  switch (action.type) {
+    case LOAD_NOTES: {
+      const notesById = {};
+      action.notes.forEach(note => {
+        notesById[note.id] = note;
+      });
+
+      return {
+        ...state,
+        notesByApplication: {
+          ...state.notesByApplication,
+          [action.notes[0]?.applicationId]: notesById, 
         }
-        return newState;
-      }      
-      case ADD_NOTE:
-        return {
-          ...state,
-          notes: { ...state.notes, [action.note.id]: action.note },
-        };
-      case UPDATE_NOTE:
-        return {
-          ...state,
-          notes: { ...state.notes, [action.note.id]: action.note },
-        };
-      case DELETE_NOTE: {
-        const newState = { ...state, notes: { ...state.notes } };
-        delete newState.notes[action.noteId];
-        return newState;
-      }
-      default:
-        return state;
+      };
     }
+
+    case ADD_NOTE: {
+      const appId = action.note.applicationId;
+      return {
+        ...state,
+        notesByApplication: {
+          ...state.notesByApplication,
+          [appId]: {
+            ...(state.notesByApplication[appId] || {}),
+            [action.note.id]: action.note
+          }
+        }
+      };
+    }
+
+    case UPDATE_NOTE: {
+      const appId = action.note.applicationId;
+      return {
+        ...state,
+        notesByApplication: {
+          ...state.notesByApplication,
+          [appId]: {
+            ...(state.notesByApplication[appId] || {}),
+            [action.note.id]: action.note
+          }
+        }
+      };
+    }
+
+    case DELETE_NOTE: {
+      const newState = { ...state.notesByApplication };
+      for (const appId in newState) {
+        if (newState[appId][action.noteId]) {
+          delete newState[appId][action.noteId];
+          break;
+        }
+      }
+      return { ...state, notesByApplication: newState };
+    }
+
+    default:
+      return state;
   }
-  
+}

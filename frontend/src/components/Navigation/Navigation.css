@@ -41,7 +41,7 @@
   margin-right: 20px; 
 }
 
-/* Profile Button (Button itself) */
+
 .profile-icon {
   display: flex; 
   align-items: center; 
@@ -53,7 +53,7 @@
   padding: 5px 8px;
 }
 
-/* Adjust individual icon spacing */
+
 .menu-icon {
   font-size: 18px;
   color: #eee;

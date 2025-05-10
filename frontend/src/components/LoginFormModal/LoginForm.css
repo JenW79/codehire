@@ -38,7 +38,7 @@
     color: #cccccc;
   }
   
-  /* Login + Demo Buttons side by side */
+  
   .login-buttons-wrapper {
     display: flex;
     justify-content: space-between;
@@ -47,9 +47,9 @@
     margin-top: 10px;
   }
   
-  /* Shared button style */
+
   .login-button, .demo-button {
-    background-color: #FF751C;
+    background-color: #d77c13;
     color: #f1f1f1;
     padding: 12px 0;
     font-size: 1.1rem;

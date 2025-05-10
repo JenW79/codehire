@@ -1,4 +1,4 @@
-/* Centered container */
+
 .signup-form-container {
   width: 90%;
   max-width: 400px;
@@ -8,7 +8,7 @@
   text-align: center;
 }
 
-/* Special styling if embedded inside Landing Page */
+
 .signup-form-container.embedded {
   background-color: #505050;
   padding: 30px;
@@ -21,14 +21,13 @@
   overflow: hidden;
 }
 
-/* Signup form layout */
+
 .signup-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* Input fields */
 .signup-form input {
   background-color: #7a7979;
   border: none;
@@ -45,7 +44,7 @@
   opacity: 1;
 }
 
-/* Error Message */
+
 .error-message {
   color: red;
   font-size: 14px;
@@ -54,7 +53,7 @@
 
 /* Sign Up Button */
 .signup-button {
-  background-color: #FF751C;
+  background-color: #d77c13;
   color: #f1f1f1;
   padding: 12px 30px;
   font-size: 1.1rem;

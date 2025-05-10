@@ -8,8 +8,8 @@ import './NotesList.css';
 function NotesList({ applicationId }) {
   const dispatch = useDispatch();
 
-  const notesMap = useSelector(state => state.notes.notes || {});
-  const notes = useMemo(() => {
+  const notesMap = useSelector(state => state.notes.notesByApplication[applicationId] || {});
+ const notes = useMemo(() => {
     return Object.values(notesMap).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   }, [notesMap]);
 

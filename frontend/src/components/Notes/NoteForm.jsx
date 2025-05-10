@@ -12,7 +12,7 @@ function NoteForm({ applicationId }) {
       if (content.trim() === "") return;
       
       await dispatch(addNoteThunk(applicationId, { content }));
-      setContent(""); // clear input after adding
+      setContent(""); 
     };
     
     return(

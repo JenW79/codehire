@@ -30,7 +30,7 @@
   }
   
   .application-controls button {
-    background-color: #ff6600;
+    background-color:#d77c13;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -40,7 +40,7 @@
   }
   
   .application-controls .edit-btn {
-      background-color: #ff6600;
+      background-color: #d77c13;
       color: white;
       padding: 8px 16px;
       border: none;

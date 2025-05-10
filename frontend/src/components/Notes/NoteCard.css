@@ -1,49 +1,60 @@
 .note-card {
-    background-color: #3a3a3a;
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 20px;
-    color: #f1f1f1;
-  }
-  
-  .note-label {
-    margin-bottom: 8px;
-  }
-  
-  .note-content p {
-    margin: 0 0 10px;
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-  
-  .note-actions {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .note-actions button {
-    background-color: #ff6600;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .note-actions button:hover {
-    background-color: #e65c00;
-  }
-  
-  .note-textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    resize: vertical;
-    background-color: #1e1e1e;
-    color: #f1f1f1;
-    font-family: inherit;
-    font-size: 1rem;
-  }
-  
+  background-color: #3a3a3a;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  color: #f1f1f1;
+}
+
+.note-label {
+  margin-bottom: 8px;
+}
+
+.note-content p {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.note-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.note-actions button {
+  background-color: #d77c13;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.note-actions button:hover {
+  background-color: #e65c00;
+}
+
+.note-textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  resize: vertical;
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  font-family: inherit;
+  font-size: 1rem;
+}
+.note-date {
+  font-size: 0.85rem;
+  color: #ccc;
+}
