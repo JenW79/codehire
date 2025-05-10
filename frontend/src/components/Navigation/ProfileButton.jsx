@@ -56,6 +56,7 @@ function ProfileButton({ user }) {
             <>
               <li className="dropdown-welcome">Hello, {user.username}</li>
               <li><NavLink to="/applications" onClick={closeMenu}>View Applications</NavLink></li>
+              <li onClick={() => navigate("/saved")}>Saved Jobs</li>
               <li><NavLink to="/jobs" onClick={closeMenu}>Search Jobs</NavLink></li>
               <li><button className="logout-button" onClick={logout}>Logout</button></li>
             </>

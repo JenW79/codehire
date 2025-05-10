@@ -1,0 +1,77 @@
+.saved-jobs-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  color: #f1f1f1;
+}
+
+.saved-jobs-box {
+  background: #3e3e3e;
+  border-radius: 20px;
+  padding: 30px;
+  width: 95%;
+  max-width: 1100px;
+  overflow-y: auto;
+}
+
+.saved-jobs-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.saved-jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.saved-job-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #4e4e4e;
+  border-radius: 16px;
+  padding: 18px 24px;
+  font-size: 1rem;
+}
+
+.saved-job-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.saved-job-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.saved-job-company {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.saved-job-date {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 5px;
+}
+
+.saved-job-actions {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.back-button {
+  margin-top: 20px;
+  background-color: orange;
+  color: black;
+  font-weight: bold;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+}

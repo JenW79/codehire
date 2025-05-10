@@ -1,13 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { saveJobThunk, unsaveJobThunk } from "../../store/jobs";
+import { saveJobThunk, unsaveJobThunk, fetchSavedJobs } from "../../store/jobs";
+import { useEffect } from "react";
 
 import "./JobDetailModal.css";
 
 
 function JobDetailModal({ job, onClose }) {
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
 const savedJobs = useSelector((state) => state.jobs.saved);
-const savedRecord = job ? savedJobs[job.id] : null;
+const savedRecord = job && savedJobs[job.id];
+
+useEffect(() => {
+  dispatch(fetchSavedJobs());
+}, [dispatch]);
 
 const handleToggleSave = () => {
   if (savedRecord) {

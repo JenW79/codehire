@@ -6,16 +6,15 @@ import { useDispatch } from "react-redux";
 import { Outlet, createBrowserRouter, RouterProvider } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import { ModalProvider } from "./context/Modal";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import ApplicationsList from "./components/Applications/ApplicationsList";
 import SingleApplication from "./components/Applications/SingleApplication";
 import ApplicationFormWrapper from "./components/Applications/ApplicationFormWrapper";
 import Navigation from "./components/Navigation/Navigation";
 import JobSearchPage from "./components/Jobs/JobsSearchPage";
-
-
+import SavedJobsPage from "./components/Jobs/SavedJobsPage";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -88,7 +87,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { 
+      {
         path: "/jobs",
         element: (
           <ProtectedRoute>
@@ -104,10 +103,17 @@ const router = createBrowserRouter([
       //     </ProtectedRoute>
       //   ),
       // },
+      {
+        path: "/saved",
+        element: (
+          <ProtectedRoute>
+            <SavedJobsPage />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
-
 
 // App Component
 function App() {

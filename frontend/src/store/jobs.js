@@ -99,15 +99,15 @@ export const fetchJobsThunk =
     }
   };
   
-  export const unsaveJobThunk = (savedJobId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/saved-jobs/${savedJobId}`, {
-      method: 'DELETE',
-    });
-  
-    if (res.ok) {
-      dispatch(removeSavedJob(savedJobId));
-    }
-  };
+  export const unsaveJobThunk = ({ id, jobId }) => async (dispatch) => {
+  const res = await csrfFetch(`/api/saved-jobs/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (res.ok) {
+    dispatch(removeSavedJob(jobId)); 
+  }
+};
 
 //INITIAL STATE
 const initialState = {
