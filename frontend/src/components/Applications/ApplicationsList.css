@@ -14,9 +14,12 @@
   background-color: #2d2d2d;
   padding: 30px;
   border-radius: 20px;
-  width: 300px;
+  width: 100%; 
+  max-width: 400px; 
+  margin: 0 auto;
   color: #f1f1f1;
   font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
 
 .application-form-wrapper h2 {
@@ -28,6 +31,8 @@
 .application-form-wrapper input,
 .application-form-wrapper select {
   width: 100%;
+  max-width: 100%;  
+  box-sizing: border-box;
   margin-bottom: 15px;
   padding: 10px;
   border: none;
@@ -84,4 +89,51 @@
   text-decoration: none;
   color: inherit;
   display: block;
+}
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+  .applications-page {
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .application-form-wrapper {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .application-headers {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .applications-page {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .application-form-wrapper {
+    width: 100%;
+    max-width: none;
+    padding: 20px;
+  }
+
+  .application-headers {
+    display: none; 
+  }
+
+  .applications-list h1 {
+    font-size: 1.5rem;
+  }
+
+  .applications-container {
+    max-height: unset;
+    padding: 10px;
+  }
 }
