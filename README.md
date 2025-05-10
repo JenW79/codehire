@@ -2,6 +2,8 @@
 
 https://codehire-ie8o.onrender.com
 
+You can create a new account or explore the app using the demo login.
+
 ---
 
 # CodeHire
@@ -16,8 +18,8 @@ A full-stack job application tracker and search assistant for tech jobs. Built w
 - **Backend:** Node.js, Express
 - **Database:** PostgreSQL (with Sequelize ORM)
 - **Authentication:** AuthMe (session-based)
-- **APIs:** JSearch (via RapidAPI), OpenAI (resume generator), Remotive (via API)
-- **Deployment:** Render (frontend + backend)
+- **APIs:** JSearch (job search), OpenAI (resume generator), Remotive (remote job search)
+- **Deployment:** Render (full-stack deployment)
 
 ---
 
@@ -46,6 +48,8 @@ DB_NAME=jobsearchtracker_dev
 DB_HOST=localhost
 PORT=8000
 SESSION_SECRET=your_secret_key
+RAPIDAPI_KEY=your_jsearch_key
+RAPIDAPI_HOST=jsearch.p.rapidapi.com
 ```
 
 Then run:
@@ -70,10 +74,9 @@ npm start
 ## API Integrations
 
 - **JSearch API**: Used to search for tech jobs across the U.S.
-- **OpenAI API**: Used to generate AI-assisted resume drafts from user summaries
+- **OpenAI API**: Used to generate AI-assisted resume drafts from user summaries(coming soon)
 - **Remotive API**: Used to search for remote tech jobs
 
-APIs are connected through backend proxy routes to protect API keys.
 
 ---
 
@@ -81,8 +84,8 @@ APIs are connected through backend proxy routes to protect API keys.
 
 - Track job applications (full CRUD)
 - Log interview follow-ups and notes (full CRUD)
-- Search live tech jobs via JSearch API (read + save)
-- Generate resume drafts using OpenAI API (create + optional save)
+- Search and save real job listings from JSearch and Remotive
+- View and apply directly from your saved jobs list
 - Session-based authentication with AuthMe
 
 ---
@@ -90,7 +93,8 @@ APIs are connected through backend proxy routes to protect API keys.
 ## Coming Soon
 
 - PDF resume export
-- Job search filters (remote, hybrid, on-site)
+- Generate resume drafts using OpenAI API (create + optional save)
+  
 
 
 ---

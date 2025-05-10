@@ -43,7 +43,7 @@ function JobDetailModal({ job, onClose }) {
       .replace(/<\/(div|p|h\d|li|ul|br)>/gi, "\n")
       .replace(/<[^>]+>/g, "")
       .trim()
-  : "No job description available.";
+  : "This job's full description is available on the Apply page. Click below to learn more.";
   return (
     <div className="job-modal-overlay" onClick={onClose}>
       <div className="job-modal" onClick={(e) => e.stopPropagation()}>
