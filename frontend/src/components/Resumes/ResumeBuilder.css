@@ -1,0 +1,101 @@
+.resume-page {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  color: #fff;
+  background-color: #232222;
+}
+
+.resume-form {
+  background-color: #2d2d2d;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 300px;
+  max-height: 400px;           
+  overflow: hidden;            
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.resume-form textarea {
+  flex-grow: 1;
+  box-sizing: border-box;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  min-height: 120px;
+  max-height: 200px; 
+  resize: vertical;
+  background-color: #444;
+  color: white;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.resume-form button {
+  margin-top: 1rem;
+  background-color: #d77c13;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  width: 100%;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.resume-list {
+  flex: 1;
+  background-color: #2d2d2d;
+  padding: 1rem;
+  border-radius: 12px;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.resume-card {
+  background-color: #444;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  position: relative;
+}
+
+.resume-card h4 {
+  margin: 0 0 0.5rem;
+  color: #ffa726;
+}
+
+.resume-card button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  color: #d77c13;
+  border: none;
+  font-size: 1rem;
+}
+
+.resume-markdown {
+  color: #eee;
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  padding-top: 0.5rem;
+}
+
+.resume-markdown h1,
+.resume-markdown h2,
+.resume-markdown h3 {
+  color: #ffa726;
+  margin-top: 1rem;
+}
+
+.resume-markdown ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+}
+
+.resume-markdown strong {
+  color: #ffb74d;
+}

@@ -7,12 +7,14 @@ import sessionReducer from './session';
 import applicationsReducer from './applications'; 
 import notesReducer from './notes';
 import jobsReducer from './jobs';
+import resumesReducer from './resumes';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   applications: applicationsReducer,
   notes: notesReducer,
   jobs: jobsReducer,
+  resumes: resumesReducer,
   // add more reducers here as needed
 });
 

@@ -15,6 +15,7 @@ import ApplicationFormWrapper from "./components/Applications/ApplicationFormWra
 import Navigation from "./components/Navigation/Navigation";
 import JobSearchPage from "./components/Jobs/JobsSearchPage";
 import SavedJobsPage from "./components/Jobs/SavedJobsPage";
+import ResumeBuilder from "./components/Resumes/ResumeBuilder";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -108,6 +109,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <SavedJobsPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/resumes",
+        element: (
+          <ProtectedRoute>
+            <ResumeBuilder />
           </ProtectedRoute>
         ),
       },

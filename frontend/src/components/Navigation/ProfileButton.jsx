@@ -75,6 +75,11 @@ function ProfileButton({ user }) {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/resumes" onClick={closeMenu}>
+                  Resumes
+                </NavLink>
+              </li>
+              <li>
                 <button className="logout-button" onClick={logout}>
                   Logout
                 </button>
