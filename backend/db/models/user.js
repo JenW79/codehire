@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.Application, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
       User.hasMany(models.Note, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
+      User.hasMany(models.Resume, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
     }
   }
 
