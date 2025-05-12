@@ -11,8 +11,8 @@
   border-radius: 12px;
   padding: 1.5rem;
   width: 300px;
-  max-height: 400px;           
-  overflow: hidden;            
+  max-height: 400px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -26,7 +26,7 @@
   border: none;
   width: 100%;
   min-height: 120px;
-  max-height: 200px; 
+  max-height: 200px;
   resize: vertical;
   background-color: #444;
   color: white;
@@ -59,22 +59,40 @@
   border-radius: 10px;
   margin-bottom: 1rem;
   padding: 1rem;
-  position: relative;
 }
 
-.resume-card h4 {
-  margin: 0 0 0.5rem;
+.resume-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.resume-card-header h4 {
   color: #ffa726;
+  margin: 0;
+  font-size: 1.1rem;
 }
 
-.resume-card button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+.resume-card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.download-btn,
+.delete-btn {
   background: transparent;
-  color: #d77c13;
+  color: #ffa726;
   border: none;
   font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.download-btn:hover,
+.delete-btn:hover {
+  color: #ffffff;
 }
 
 .resume-markdown {
@@ -99,3 +117,54 @@
 .resume-markdown strong {
   color: #ffb74d;
 }
+
+@media (max-width: 900px) {
+  .resume-page {
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 2rem;
+  }
+
+  .resume-form,
+  .resume-list {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .resume-form {
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .resume-form {
+    padding: 1rem;
+  }
+
+  .resume-form textarea {
+    font-size: 0.95rem;
+    min-height: 100px;
+  }
+
+  .resume-form button {
+    padding: 0.25rem;
+    font-size: 0.9rem;
+  }
+
+  .resume-list {
+    padding: 0.75rem;
+  }
+
+  .resume-card {
+    padding: 0.75rem;
+  }
+
+  .resume-card h4 {
+    font-size: 1rem;
+  }
+
+  .resume-markdown {
+    font-size: 0.95rem;
+  }
+}
+

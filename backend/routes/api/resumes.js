@@ -23,6 +23,20 @@ router.post("/generate", requireAuth, async (req, res) => {
   //   return res.json(newResume);
   // }
 
+  if (summary.trim().length < 50) {
+  return res.status(400).json({ error: "Summary is too short. Please provide more detail." });
+}
+
+const allowedKeywords = ["developer", "engineer", "software", "frontend", "backend", "data", "full-stack"];
+const summaryLower = summary.toLowerCase();
+const hasValidKeyword = allowedKeywords.some((word) => summaryLower.includes(word));
+
+if (!hasValidKeyword) {
+  return res.status(400).json({
+    error: "Please include relevant job-related information in your summary.",
+  });
+}
+
   const estimatedTokens = Math.ceil(summary.length / 4);
   if (estimatedTokens > 800) {
     return res.status(400).json({ error: "Summary is too long. Please shorten it." });

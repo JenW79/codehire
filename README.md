@@ -74,7 +74,7 @@ npm start
 ## API Integrations
 
 - **JSearch API**: Used to search for tech jobs across the U.S.
-- **OpenAI API**: Used to generate AI-assisted resume drafts from user summaries(coming soon)
+- **OpenAI API**: OpenAI API: Used to generate AI-assisted resume drafts from user summaries (with token limits and validation)
 - **Remotive API**: Used to search for remote tech jobs
 
 
@@ -87,15 +87,8 @@ npm start
 - Search and save real job listings from JSearch and Remotive
 - View and apply directly from your saved jobs list
 - Session-based authentication with AuthMe
-
----
-
-## Coming Soon
-
 - PDF resume export
-- Generate resume drafts using OpenAI API (create + optional save)
-  
-
+- Generate resume drafts using OpenAI API (create + auto save)
 
 ---
 
@@ -104,3 +97,21 @@ npm start
 **Jen W.**  
 Capstone project for App Academy  
 [GitHub](https://github.com/JenW79)
+
+---
+
+## Coming Soon
+
+- Edit resumes 
+- User account panel
+
+---
+  
+## Screenshots, short videos (coming soon)
+
+###  Job Search
+![Job Search](h)
+
+###  Resume Generator
+![Resume](h)
+  

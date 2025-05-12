@@ -6,7 +6,8 @@ import {
   deleteResume,
 } from "../../store/resumes";
 import ReactMarkdown from "react-markdown";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaDownload } from "react-icons/fa";
+import html2pdf from "html2pdf.js";
 import "./ResumeBuilder.css";
 
 export default function ResumeBuilder() {
@@ -18,14 +19,14 @@ export default function ResumeBuilder() {
   const [maxResumes, setMaxResumes] = useState(3);
   const [message, setMessage] = useState("");
 
- useEffect(() => {
-  dispatch(fetchResumes()).then((data) => {
-    if (data) {
-      setResumesUsed(data.resumesUsed);
-      setMaxResumes(data.maxResumes);
-    }
-  });
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchResumes()).then((data) => {
+      if (data) {
+        setResumesUsed(data.resumesUsed);
+        setMaxResumes(data.maxResumes);
+      }
+    });
+  }, [dispatch]);
 
   const handleGenerate = async () => {
     const res = await dispatch(
@@ -46,6 +47,32 @@ export default function ResumeBuilder() {
   const handleDelete = (id) => {
     dispatch(deleteResume(id));
   };
+
+ const handleDownload = (resume) => {
+  const original = document.getElementById(`resume-${resume.id}`);
+  const clone = original.cloneNode(true);
+
+  
+  clone.style.backgroundColor = "#fff";
+  clone.style.color = "#000";
+  clone.style.padding = "1rem";
+
+  
+  clone.querySelectorAll("*").forEach((el) => {
+    el.style.color = "#000";
+    el.style.background = "#fff";
+  });
+
+  const opt = {
+    margin: 0.5,
+    filename: `${resume.title.replace(/\s+/g, "_")}.pdf`,
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+  };
+
+  html2pdf().set(opt).from(clone).save();
+}
 
   return (
     <div className="resume-page">
@@ -76,14 +103,27 @@ export default function ResumeBuilder() {
         ) : (
           resumes.map((resume) => (
             <div className="resume-card" key={resume.id}>
-              <h4>{resume.title}</h4>
-              <button
-                onClick={() => handleDelete(resume.id)}
-                title="Delete Resume"
-              >
-                <FaTrash />
-              </button>
-              <div className="resume-markdown">
+              <div className="resume-card-header">
+                <h4>{resume.title}</h4>
+                <div className="resume-card-actions">
+                  <button
+                    className="download-btn"
+                    onClick={() => handleDownload(resume)}
+                    title="Download Resume"
+                  >
+                    <FaDownload />
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(resume.id)}
+                    title="Delete Resume"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              </div>
+
+              <div id={`resume-${resume.id}`} className="resume-markdown">
                 <ReactMarkdown>{resume.content}</ReactMarkdown>
               </div>
             </div>
