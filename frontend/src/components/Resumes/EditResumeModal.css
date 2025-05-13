@@ -1,0 +1,75 @@
+.edit-resume-modal {
+  width: 100%;
+  max-width: 700px;
+  max-height: 80vh;
+  padding: 30px;
+  overflow-y: auto;
+  background-color: #505050;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  font-family: 'Poppins', sans-serif;
+}
+
+.edit-resume-modal h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #f1f1f1;
+}
+
+.edit-resume-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.edit-resume-modal input,
+.edit-resume-modal textarea {
+  background-color: #7a7979;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  color: #f1f1f1;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.edit-resume-modal input::placeholder,
+.edit-resume-modal textarea::placeholder {
+  color: #cccccc;
+}
+
+.experience-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-resume-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.edit-resume-buttons button {
+  background-color: #d77c13;
+  color: #f1f1f1;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  flex: 1;
+  max-width: 150px;
+}
+
+.edit-resume-buttons button:hover {
+  background-color: #e46615;
+}
+
+.cancel-button {
+  background-color: #777 !important;
+}

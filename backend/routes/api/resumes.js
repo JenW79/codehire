@@ -6,45 +6,28 @@ const openai = require("../../utils/openai");
 const { requireAuth } = require("../../utils/auth");
 const { Op } = require("sequelize");
 
+const sanitize = (str) => {
+  if (!str || typeof str !== "string") return "";
+  return str
+    .trim()
+    .replace(/<[^>]*>?/gm, "")
+    .slice(0, 1000);
+};
+
 router.post("/generate", requireAuth, async (req, res) => {
-  const { summary, title = "Untitled Resume" } = req.body;
   const userId = req.user.id;
+  const {
+    name,
+    jobTitle,
+    education,
+    skills,
+    summary,
+    experience = [],
+    title = "Generated Resume",
+  } = req.body;
 
-  // // Mock for non-production environments
-  // if (process.env.NODE_ENV !== "production") {
-  //   const mockContent = `**Summary:**\n\nExperienced frontend developer with a strong background in React and Redux.`;
-
-  //   const newResume = await Resume.create({
-  //     userId,
-  //     title,
-  //     content: mockContent,
-  //   });
-
-  //   return res.json(newResume);
-  // }
-
-  if (summary.trim().length < 50) {
-  return res.status(400).json({ error: "Summary is too short. Please provide more detail." });
-}
-
-const allowedKeywords = ["developer", "engineer", "software", "frontend", "backend", "data", "full-stack"];
-const summaryLower = summary.toLowerCase();
-const hasValidKeyword = allowedKeywords.some((word) => summaryLower.includes(word));
-
-if (!hasValidKeyword) {
-  return res.status(400).json({
-    error: "Please include relevant job-related information in your summary.",
-  });
-}
-
-  const estimatedTokens = Math.ceil(summary.length / 4);
-  if (estimatedTokens > 800) {
-    return res.status(400).json({ error: "Summary is too long. Please shorten it." });
-  }
-
-  // Check if the user has already generated 3 resumes today
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // Set to midnight for "today"
+  today.setHours(0, 0, 0, 0);
 
   const countToday = await Resume.count({
     where: {
@@ -53,14 +36,82 @@ if (!hasValidKeyword) {
     },
   });
 
-   if (countToday >= 3) {
+  if (countToday >= 3) {
     return res.status(403).json({
-      error: "You have reached your daily resume generation limit. Try again tomorrow.",
-      dailyLimitReached: true,
-      resumesUsed: countToday, 
-      maxResumes: 3, 
+      error: "You have reached your daily resume generation limit.",
+      resumesUsed: countToday,
+      maxResumes: 3,
     });
   }
+
+  // Sanitize inputs
+  const safeName = sanitize(name);
+  const safeTitle = sanitize(jobTitle);
+  const safeEducation = sanitize(education);
+  const safeSkills = sanitize(skills);
+  const safeSummary = sanitize(summary);
+  const safeExperience = Array.isArray(experience)
+  ? experience
+      .slice(0, 3)
+      .map((job) => ({
+        title: sanitize(job.title),
+        company: sanitize(job.company),
+        description: sanitize(job.description),
+      }))
+      .filter(
+        (job) =>
+          job.title.length > 1 ||
+          job.company.length > 1 ||
+          job.description.length > 1
+      )
+  : [];
+
+
+  const baseTitle = sanitize(title || "Generated Resume");
+
+ const allTitles = await Resume.findAll({
+  where: { userId },
+  attributes: ["title"],
+});
+
+const existingTitlesSet = new Set(
+  allTitles
+    .map((r) => r.title)
+    .filter((t) => t?.toLowerCase().startsWith(baseTitle.toLowerCase()))
+    .map((t) => t.toLowerCase())
+);
+
+
+  let finalTitle = baseTitle;
+  let counter = 2;
+  while (existingTitlesSet.has(finalTitle.toLowerCase())) {
+    finalTitle = `${baseTitle} (${counter})`;
+    counter++;
+  }
+
+  const isMeaningful = (value) => value.length >= 1;
+
+if (
+  !isMeaningful(safeName) ||
+  !isMeaningful(safeTitle) ||
+  !isMeaningful(safeSkills) ||
+  !isMeaningful(safeSummary)
+) {
+  return res.status(400).json({ error: "Missing or invalid resume details." });
+}
+
+  // Build prompt
+  let prompt = `Generate a professional resume for:\n\n`;
+  prompt += `Name: ${safeName}\nJob Title: ${safeTitle}\nEducation: ${safeEducation}\nSkills: ${safeSkills}\nSummary: ${safeSummary}\n`;
+
+  if (safeExperience.length) {
+    prompt += `Experience:\n`;
+    for (let job of safeExperience) {
+      prompt += `- ${job.title} at ${job.company}: ${job.description}\n`;
+    }
+  }
+
+  prompt += `\nFormat it cleanly and make it ATS-friendly.`;
 
   try {
     const completion = await openai.createChatCompletion({
@@ -72,7 +123,7 @@ if (!hasValidKeyword) {
         },
         {
           role: "user",
-          content: `Generate a clean, ATS-friendly resume from the following summary:\n\n${summary}`,
+          content: prompt,
         },
       ],
     });
@@ -81,17 +132,20 @@ if (!hasValidKeyword) {
 
     const newResume = await Resume.create({
       userId,
-      title,
+      title: finalTitle,
       content: resumeText,
     });
 
-     res.json({
+    res.json({
       newResume,
-      resumesUsed: countToday + 1, 
+      resumesUsed: countToday + 1,
       maxResumes: 3,
     });
   } catch (err) {
-    console.error(err);
+    console.error(
+      "Resume Generation Error:",
+      err.response?.data || err.message || err
+    );
     res.status(500).json({ error: "Resume generation failed." });
   }
 });
@@ -119,7 +173,6 @@ router.get("/", requireAuth, async (req, res) => {
     order: [["createdAt", "DESC"]],
   });
 
-  
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -136,6 +189,24 @@ router.get("/", requireAuth, async (req, res) => {
     maxResumes: 3,
   });
 });
+
+// Update a resume
+router.put("/:id", requireAuth, async (req, res) => {
+  const userId = req.user.id;
+  const { title, content } = req.body;
+  const resume = await Resume.findByPk(req.params.id);
+
+  if (!resume || resume.userId !== userId) {
+    return res.status(404).json({ error: "Resume not found or unauthorized" });
+  }
+
+  resume.title = title || resume.title;
+  resume.content = content || resume.content;
+  await resume.save();
+
+  res.json(resume);
+});
+
 
 // Delete a resume
 router.delete("/:id", requireAuth, async (req, res) => {
