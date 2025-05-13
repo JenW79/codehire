@@ -51,36 +51,34 @@ router.post("/generate", requireAuth, async (req, res) => {
   const safeSkills = sanitize(skills);
   const safeSummary = sanitize(summary);
   const safeExperience = Array.isArray(experience)
-  ? experience
-      .slice(0, 3)
-      .map((job) => ({
-        title: sanitize(job.title),
-        company: sanitize(job.company),
-        description: sanitize(job.description),
-      }))
-      .filter(
-        (job) =>
-          job.title.length > 1 ||
-          job.company.length > 1 ||
-          job.description.length > 1
-      )
-  : [];
-
+    ? experience
+        .slice(0, 3)
+        .map((job) => ({
+          title: sanitize(job.title),
+          company: sanitize(job.company),
+          description: sanitize(job.description),
+        }))
+        .filter(
+          (job) =>
+            job.title.length > 1 ||
+            job.company.length > 1 ||
+            job.description.length > 1
+        )
+    : [];
 
   const baseTitle = sanitize(title || "Generated Resume");
 
- const allTitles = await Resume.findAll({
-  where: { userId },
-  attributes: ["title"],
-});
+  const allTitles = await Resume.findAll({
+    where: { userId },
+    attributes: ["title"],
+  });
 
-const existingTitlesSet = new Set(
-  allTitles
-    .map((r) => r.title)
-    .filter((t) => t?.toLowerCase().startsWith(baseTitle.toLowerCase()))
-    .map((t) => t.toLowerCase())
-);
-
+  const existingTitlesSet = new Set(
+    allTitles
+      .map((r) => r.title)
+      .filter((t) => t?.toLowerCase().startsWith(baseTitle.toLowerCase()))
+      .map((t) => t.toLowerCase())
+  );
 
   let finalTitle = baseTitle;
   let counter = 2;
@@ -91,14 +89,16 @@ const existingTitlesSet = new Set(
 
   const isMeaningful = (value) => value.length >= 1;
 
-if (
-  !isMeaningful(safeName) ||
-  !isMeaningful(safeTitle) ||
-  !isMeaningful(safeSkills) ||
-  !isMeaningful(safeSummary)
-) {
-  return res.status(400).json({ error: "Missing or invalid resume details." });
-}
+  if (
+    !isMeaningful(safeName) ||
+    !isMeaningful(safeTitle) ||
+    !isMeaningful(safeSkills) ||
+    !isMeaningful(safeSummary)
+  ) {
+    return res
+      .status(400)
+      .json({ error: "Missing or invalid resume details." });
+  }
 
   // Build prompt
   let prompt = `Generate a professional resume for:\n\n`;
@@ -134,6 +134,12 @@ if (
       userId,
       title: finalTitle,
       content: resumeText,
+      name: safeName,
+      jobTitle: safeTitle,
+      education: safeEducation,
+      skills: safeSkills,
+      summary: safeSummary,
+      experience: safeExperience,
     });
 
     res.json({
@@ -202,11 +208,16 @@ router.put("/:id", requireAuth, async (req, res) => {
 
   resume.title = title || resume.title;
   resume.content = content || resume.content;
+  resume.name = req.body.name || resume.name;
+  resume.jobTitle = req.body.jobTitle || resume.jobTitle;
+  resume.education = req.body.education || resume.education;
+  resume.skills = req.body.skills || resume.skills;
+  resume.summary = req.body.summary || resume.summary;
+  resume.experience = req.body.experience || resume.experience;
   await resume.save();
 
   res.json(resume);
 });
-
 
 // Delete a resume
 router.delete("/:id", requireAuth, async (req, res) => {

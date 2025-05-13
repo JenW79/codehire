@@ -8,41 +8,6 @@ export default function EditResumeModal({ resume }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  const parseMarkdown = (content) => {
-    const lines = content.split("\n");
-    const data = {
-      name: "",
-      jobTitle: "",
-      education: "",
-      skills: "",
-      summary: "",
-      experience: [],
-    };
-    let currentField = "";
-    for (let line of lines) {
-      if (line.startsWith("Name:")) data.name = line.replace("Name:", "").trim();
-      else if (line.startsWith("Job Title:")) data.jobTitle = line.replace("Job Title:", "").trim();
-      else if (line.startsWith("Education:")) data.education = line.replace("Education:", "").trim();
-      else if (line.startsWith("Skills:")) data.skills = line.replace("Skills:", "").trim();
-      else if (line.startsWith("Summary:")) data.summary = line.replace("Summary:", "").trim();
-      else if (line.startsWith("Experience:")) currentField = "experience";
-      else if (line.startsWith("-") && currentField === "experience") {
-        const match = line.match(/^- (.+) at (.+?): (.+)$/);
-        if (match) {
-          data.experience.push({
-            title: match[1].trim(),
-            company: match[2].trim(),
-            description: match[3].trim(),
-          });
-        }
-      }
-    }
-    while (data.experience.length < 3) {
-      data.experience.push({ title: "", company: "", description: "" });
-    }
-    return data;
-  };
-
   const generateMarkdownFromFields = (data) => {
     let md = `Name: ${data.name}\nJob Title: ${data.jobTitle}\nEducation: ${data.education}\nSkills: ${data.skills}\nSummary: ${data.summary}\n`;
     if (data.experience?.length) {
@@ -56,7 +21,19 @@ export default function EditResumeModal({ resume }) {
     return md;
   };
 
-  const [formData, setFormData] = useState(parseMarkdown(resume.content));
+  const [formData, setFormData] = useState({
+    name: resume.name || "",
+    jobTitle: resume.jobTitle || "",
+    education: resume.education || "",
+    skills: resume.skills || "",
+    summary: resume.summary || "",
+    experience: resume.experience || [
+      { title: "", company: "", description: "" },
+      { title: "", company: "", description: "" },
+      { title: "", company: "", description: "" },
+    ],
+  });
+
   const [error, setError] = useState("");
 
   const handleSave = async (e) => {
@@ -72,7 +49,8 @@ export default function EditResumeModal({ resume }) {
 
     const res = await dispatch(updateResume(resume.id, {
       title: resume.title,
-      content
+      content,
+      ...formData,
     }));
 
     if (res.success) {

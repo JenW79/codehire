@@ -14,16 +14,15 @@ function JobDetailModal({ job, onClose }) {
   }, [dispatch]);
 
   useEffect(() => {
-  document.body.classList.add("modal-open");
-  return () => document.body.classList.remove("modal-open");
-}, []);
-
+    document.body.classList.add("modal-open");
+    return () => document.body.classList.remove("modal-open");
+  }, []);
 
   const handleToggleSave = () => {
-    if (savedRecord) {
-      dispatch(unsaveJobThunk(savedRecord.id)); // backend needs saved record ID
+    if (savedRecord && savedRecord.id) {
+      dispatch(unsaveJobThunk(savedRecord.id));
     } else {
-      dispatch(saveJobThunk(job)); // normalized job already has title, location, etc.
+      console.warn(" Can't unsave: No saved record found for job", job);
     }
   };
   if (job === null) {
@@ -39,11 +38,11 @@ function JobDetailModal({ job, onClose }) {
 
   if (!job) return null;
   const plainDescription = job.description
-  ? job.description
-      .replace(/<\/(div|p|h\d|li|ul|br)>/gi, "\n")
-      .replace(/<[^>]+>/g, "")
-      .trim()
-  : "This job's full description is available on the Apply page. Click below to learn more.";
+    ? job.description
+        .replace(/<\/(div|p|h\d|li|ul|br)>/gi, "\n")
+        .replace(/<[^>]+>/g, "")
+        .trim()
+    : "This job's full description is available on the Apply page. Click below to learn more.";
   return (
     <div className="job-modal-overlay" onClick={onClose}>
       <div className="job-modal" onClick={(e) => e.stopPropagation()}>
@@ -70,9 +69,11 @@ function JobDetailModal({ job, onClose }) {
           <a href={job.applyUrl} target="_blank" rel="noreferrer">
             Apply
           </a>
-          <button onClick={handleToggleSave}>
-            {savedRecord ? "Unsave Job" : "Save Job"}
-          </button>
+          {!savedRecord && (
+            <button onClick={() => dispatch(saveJobThunk(job))}>
+              Save Job
+            </button>
+          )}
           <button onClick={onClose}>Close</button>
         </div>
       </div>

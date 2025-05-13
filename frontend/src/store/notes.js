@@ -1,42 +1,42 @@
-import { csrfFetch } from './csrf';
+import { csrfFetch } from "./csrf";
 
 // Action Types
-const LOAD_NOTES = 'notes/LOAD_NOTES';
-const ADD_NOTE = 'notes/ADD_NOTE';
-const UPDATE_NOTE = 'notes/UPDATE_NOTE';
-const DELETE_NOTE = 'notes/DELETE_NOTE';
+const LOAD_NOTES = "notes/LOAD_NOTES";
+const ADD_NOTE = "notes/ADD_NOTE";
+const UPDATE_NOTE = "notes/UPDATE_NOTE";
+const DELETE_NOTE = "notes/DELETE_NOTE";
 
 // Action Creators
-const loadNotes = (notes) => ({type: LOAD_NOTES, notes});
-const addNote = (note) => ({type: ADD_NOTE, note});
-const updateNote = (note) => ({type: UPDATE_NOTE, note});
-const deleteNote = (noteId) => ({type: DELETE_NOTE, noteId});
+const loadNotes = (notes) => ({ type: LOAD_NOTES, notes });
+const addNote = (note) => ({ type: ADD_NOTE, note });
+const updateNote = (note) => ({ type: UPDATE_NOTE, note });
+const deleteNote = (noteId) => ({ type: DELETE_NOTE, noteId });
 
 // Thunks
 
 export const loadNotesThunk = (applicationId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/applications/${applicationId}/notes`);
-    if (res.ok) {
-      const data = await res.json();
-      dispatch(loadNotes(data.notes));
-    }
-  };
-
-  export const addNoteThunk = (applicationId, noteData) => async (dispatch) => {
-    const res = await csrfFetch(`/api/applications/${applicationId}/notes`, {
-      method: 'POST',
-      body: JSON.stringify(noteData),
-    });
-    if (res.ok) {
-      const note = await res.json();
-      dispatch(addNote(note));
-      return note;
-    }
+  const res = await csrfFetch(`/api/applications/${applicationId}/notes`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadNotes(data.notes));
   }
+};
 
-  export const updateNoteThunk = (noteId, noteData) => async (dispatch) => {
+export const addNoteThunk = (applicationId, noteData) => async (dispatch) => {
+  const res = await csrfFetch(`/api/applications/${applicationId}/notes`, {
+    method: "POST",
+    body: JSON.stringify(noteData),
+  });
+  if (res.ok) {
+    const note = await res.json();
+    dispatch(addNote(note));
+    return note;
+  }
+};
+
+export const updateNoteThunk = (noteId, noteData) => async (dispatch) => {
   const res = await csrfFetch(`/api/notes/${noteId}`, {
-    method: 'PUT',
+    method: "PUT",
     body: JSON.stringify(noteData),
   });
 
@@ -47,18 +47,18 @@ export const loadNotesThunk = (applicationId) => async (dispatch) => {
   }
 };
 
-  export const deleteNoteThunk = (noteId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/notes/${noteId}`, {
-      method: 'DELETE',
-    });
-    if (res.ok) {
-      dispatch(deleteNote(noteId));
-    }
-  };
+export const deleteNoteThunk = (noteId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/notes/${noteId}`, {
+    method: "DELETE",
+  });
+  if (res.ok) {
+    dispatch(deleteNote(noteId));
+  }
+};
 
 // Initial State
 const initialState = {
-    notesByApplication: {},
+  notesByApplication: {},
 };
 
 // Reducer
@@ -66,7 +66,7 @@ export default function notesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_NOTES: {
       const notesById = {};
-      action.notes.forEach(note => {
+      action.notes.forEach((note) => {
         notesById[note.id] = note;
       });
 
@@ -74,8 +74,8 @@ export default function notesReducer(state = initialState, action) {
         ...state,
         notesByApplication: {
           ...state.notesByApplication,
-          [action.notes[0]?.applicationId]: notesById, 
-        }
+          [action.notes[0]?.applicationId]: notesById,
+        },
       };
     }
 
@@ -87,9 +87,9 @@ export default function notesReducer(state = initialState, action) {
           ...state.notesByApplication,
           [appId]: {
             ...(state.notesByApplication[appId] || {}),
-            [action.note.id]: action.note
-          }
-        }
+            [action.note.id]: action.note,
+          },
+        },
       };
     }
 
@@ -101,20 +101,24 @@ export default function notesReducer(state = initialState, action) {
           ...state.notesByApplication,
           [appId]: {
             ...(state.notesByApplication[appId] || {}),
-            [action.note.id]: action.note
-          }
-        }
+            [action.note.id]: action.note,
+          },
+        },
       };
     }
 
     case DELETE_NOTE: {
       const newState = { ...state.notesByApplication };
+
       for (const appId in newState) {
         if (newState[appId][action.noteId]) {
-          delete newState[appId][action.noteId];
+          const updatedNotes = { ...newState[appId] };
+          delete updatedNotes[action.noteId];
+          newState[appId] = updatedNotes;
           break;
         }
       }
+
       return { ...state, notesByApplication: newState };
     }
 

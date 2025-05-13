@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadApplicationsThunk } from "../../store/applications";
 import { Link } from "react-router-dom";
 import ApplicationCard from "./ApplicationCard";
-import ApplicationFormWrapper from './ApplicationFormWrapper';
+import ApplicationFormWrapper from "./ApplicationFormWrapper";
 import "./ApplicationsList.css";
 
 function ApplicationsList() {
@@ -37,15 +37,21 @@ function ApplicationsList() {
         </div>
 
         <div className="applications-container">
-          {Object.values(applications).map((app) => (
-            <Link
-              key={app.id}
-              to={`/applications/${app.id}`}
-              className="application-link"
-            >
-              <ApplicationCard application={app} />
-            </Link>
-          ))}
+          {Object.values(applications).length === 0 ? (
+            <p className="empty-app-message">
+              No applications yet — go ahead and create your first one! 
+            </p>
+          ) : (
+            Object.values(applications).map((app) => (
+              <Link
+                key={app.id}
+                to={`/applications/${app.id}`}
+                className="application-link"
+              >
+                <ApplicationCard application={app} />
+              </Link>
+            ))
+          )}
         </div>
       </div>
     </div>

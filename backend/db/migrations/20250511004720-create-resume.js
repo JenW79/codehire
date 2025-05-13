@@ -1,4 +1,5 @@
 'use strict';
+
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
@@ -18,7 +19,7 @@ module.exports = {
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Users' }, 
+        references: { model: 'Users' },
         onDelete: 'CASCADE',
       },
       title: {
@@ -29,6 +30,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
+      name: Sequelize.STRING,
+      jobTitle: Sequelize.STRING,
+      education: Sequelize.STRING,
+      skills: Sequelize.TEXT,
+      summary: Sequelize.TEXT,
+      experience: Sequelize.JSON,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -39,8 +46,10 @@ module.exports = {
       },
     });
   },
+
   async down(queryInterface, Sequelize) {
     options.tableName = 'Resumes';
     await queryInterface.dropTable(options);
   },
 };
+

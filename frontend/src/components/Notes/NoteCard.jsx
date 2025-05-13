@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteNoteThunk, updateNoteThunk } from "../../store/notes";
+import { useModal } from "../../context/Modal";
+import ConfirmDeleteNoteModal from "./ConfirmDeleteModal";
 import "./NoteCard.css";
 
 function NoteCard({ note }) {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [content, setContent] = useState(note.content);
+  const { setModalContent } = useModal();
 
-  const handleDelete = async () => {
-    if (window.confirm("Are you sure you want to delete this note?")) {
-      await dispatch(deleteNoteThunk(note.id));
-    }
-  };
+  const handleDelete = () => {
+  setModalContent(<ConfirmDeleteNoteModal noteId={note.id} />);
+};
 
   const handleSave = async () => {
     try {

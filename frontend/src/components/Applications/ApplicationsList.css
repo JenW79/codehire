@@ -91,6 +91,14 @@
   display: block;
 }
 
+.empty-app-message {
+  text-align: center;
+  color: #f1f1f1;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  font-style: italic;
+}
+
 /* Responsive */
 
 @media (max-width: 1024px) {
