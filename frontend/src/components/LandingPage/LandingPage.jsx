@@ -1,147 +1,58 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import * as sessionActions from "../../store/session";
-import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import { toast } from "react-toastify";
-
-import LoginFormModal from "../LoginFormModal/LoginFormModal";
+import SignupFormModal from "../SignupFormModal/SignupFormModal";
+import { FaClipboardList, FaFileAlt, FaBriefcase } from "react-icons/fa";
 import "../LandingPage/LandingPage.css";
 
 function LandingPage() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { setModalContent } = useModal();
-
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors({});
-
-    if (password !== confirmPassword) {
-      setErrors({ confirmPassword: "Passwords do not match" });
-      return;
-    }
-
-    return dispatch(
-      sessionActions.signup({
-        email,
-        username,
-        firstName: name,
-        lastName: name,
-        password,
-      })
-    )
-      .then(() => {
-        toast.success("Welcome back!", { autoClose: 2000 });
-        navigate("/applications");
-      })
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data?.errors) {
-          setErrors(data.errors);
-        }
-      });
-  };
 
   return (
     <div className="landing-page">
+      {/* LEFT SIDE — Value Pitch */}
       <div className="left-side">
-        <h1>Join now</h1>
-        <p className="login-link">
-          Already Registered?{" "}
-          <span
-            className="link-span"
-            onClick={() => setModalContent(() => LoginFormModal)}
-            style={{ cursor: "pointer" }}
-          >
-            Login
-          </span>
-        </p>
-        <div className="divider"></div>
+        <h1>Job Hunting. Organized.</h1>
         <p className="info-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper
-          mauris in magna venenatis suscipit.
+          CodeHire gives you everything you need to track applications, generate
+          resumes, and stay on top of your job search, all in one sleek
+          interface.
         </p>
+
+        <ul className="features-list">
+          <li>
+            <FaClipboardList className="feature-icon" /> Track jobs & follow-ups
+          </li>
+          <li>
+            <FaFileAlt className="feature-icon" /> Build resumes with AI assist
+          </li>
+          <li>
+            <FaBriefcase className="feature-icon" /> Save listings, add notes, and more!
+          </li>
+        </ul>
       </div>
 
+      {/* RIGHT SIDE — CTA Box */}
       <div className="right-side">
-        <div className="signup-form-container">
-          <h2>Sign up for free</h2>
-          <form className="signup-form" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            {errors.firstName && (
-              <p className="error-message">{errors.firstName}</p>
-            )}
-
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            {errors.email && <p className="error-message">{errors.email}</p>}
-
-            <input
-              type="text"
-              placeholder="Username (4-30 characters)"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            {errors.username && (
-              <p className="error-message">{errors.username}</p>
-            )}
-
-            <input
-              type="password"
-              placeholder="Password (min. 6 characters)"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            {errors.password && (
-              <p className="error-message">{errors.password}</p>
-            )}
-
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-            {errors.confirmPassword && (
-              <p className="error-message">{errors.confirmPassword}</p>
-            )}
-
-            <button
-              type="submit"
-              className="submit-button"
-              disabled={
-                !email.length ||
-                !username.length ||
-                !name.length ||
-                password.length < 6 ||
-                password !== confirmPassword
-              }
+        <div className="cta-container">
+          <h2>Start Your Job Search Smarter</h2>
+          <p className="cta-text">
+            “CodeHire helped me organize my job hunt and land 3 interviews, all
+            in a week!” - <i>Sarah M., Software Engineer</i>
+          </p>
+          <button
+            className="cta-button"
+            onClick={() => setModalContent(() => SignupFormModal)}
+          >
+            Sign Up Free
+          </button>
+          <p className="subtext">
+            Already have an account?{" "}
+            <span
+              className="link-span"
+              onClick={() => setModalContent(() => LoginFormModal)}
             >
-              Sign Up
-            </button>
-          </form>
+              Log in here
+            </span>
+          </p>
         </div>
       </div>
     </div>

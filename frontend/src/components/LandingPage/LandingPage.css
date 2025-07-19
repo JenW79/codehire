@@ -14,7 +14,6 @@
 
 .left-side {
   flex: 1;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 500px;
@@ -81,50 +80,6 @@
 
 }
 
-.signup-form-container {
-  background-color: #3a3a3a;
-  padding: 20px 20px;
-  border-radius: 25px;
-  width: 100%;
-  max-width: 380px;
-  text-align: center;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;    
-  height: auto;
-}
-
-.signup-form-container h2 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.signup-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center; 
-  margin-top: 10px; 
-}
-
-.signup-form input {
-  background-color: #6e6e6e;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 20px;
-  color: #f1f1f1;
-  font-size: 1rem;
-  text-align: center;
-  width: 90%;
-}
-
-.signup-form input::placeholder {
-  color: #cccccc;
-  opacity: 1;
-}
 
 .submit-button {
   background-color: #d77c13;
@@ -150,6 +105,80 @@
   cursor: not-allowed;
   color: #eee;
 }
+
+.features-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 20px 0 30px;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.features-list li {
+  margin-bottom: 10px;
+}
+
+.cta-container {
+  background-color: #3a3a3a;
+  padding: 40px 30px;
+  border-radius: 25px;
+  text-align: center;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-container h2 {
+  font-size: 1.8rem;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 15px;
+  color: #e46615
+}
+
+.cta-text {
+  font-size: 1rem;
+  margin-bottom: 25px;
+  color: #dddddd;
+  font-style: italic;
+}
+
+.cta-button {
+  background-color: #d77c13;
+  color: #fff;
+  border: none;
+  padding: 14px 35px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  transition: background-color 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: #e07d0d;
+}
+
+.subtext {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.subtext .link-span {
+  color: #d77c13;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.feature-icon {
+  margin-right: 10px;
+  color: #d77c13;
+  vertical-align: middle;
+}
+
 
 /*responsive*/
 
