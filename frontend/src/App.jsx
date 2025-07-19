@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, createBrowserRouter, RouterProvider } from "react-router-dom";
 import * as sessionActions from "./store/session";
-import { ModalProvider } from "./context/Modal";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,6 +15,7 @@ import Navigation from "./components/Navigation/Navigation";
 import JobSearchPage from "./components/Jobs/JobsSearchPage";
 import SavedJobsPage from "./components/Jobs/SavedJobsPage";
 import ResumeBuilder from "./components/Resumes/ResumeBuilder";
+import { Modal } from "./context/Modal";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -30,11 +30,12 @@ function Layout() {
   }, [dispatch]);
 
   return (
-    <ModalProvider>
+    <>
       <Navigation isLoaded={isLoaded} />
       <ToastContainer />
       {isLoaded && <Outlet />}
-    </ModalProvider>
+      <Modal />
+    </>
   );
 }
 

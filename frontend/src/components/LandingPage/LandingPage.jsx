@@ -58,7 +58,7 @@ function LandingPage() {
           Already Registered?{" "}
           <span
             className="link-span"
-            onClick={() => setModalContent(<LoginFormModal />)}
+            onClick={() => setModalContent(() => LoginFormModal)}
             style={{ cursor: "pointer" }}
           >
             Login

@@ -11,7 +11,7 @@ function OpenModalMenuItem({
 
   const onClick = () => {
     if (onModalClose) setOnModalClose(onModalClose);
-    setModalContent(modalComponent);
+    setModalContent(() => modalComponent);
     if (typeof onItemClick === "function") onItemClick();
   };
 
