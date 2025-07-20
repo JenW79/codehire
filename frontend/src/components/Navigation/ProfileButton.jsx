@@ -7,6 +7,7 @@ import * as sessionActions from "../../store/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import SignupFormModal from "../SignupFormModal/SignupFormModal";
+
 import "./ProfileButton.css";
 
 function ProfileButton({ user }) {
@@ -59,6 +60,12 @@ function ProfileButton({ user }) {
           {user ? (
             <>
               <li className="dropdown-welcome">Hello, {user.username}</li>
+
+              <li>
+                <NavLink to="/dashboard" onClick={closeMenu}>
+                  Dashboard
+                </NavLink>
+              </li>
               <li>
                 <NavLink to="/applications" onClick={closeMenu}>
                   View Applications

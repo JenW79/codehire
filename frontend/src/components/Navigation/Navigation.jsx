@@ -8,7 +8,7 @@ function Navigation({ isLoaded }) {
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
-    if (user) navigate("/applications");
+    if (user) navigate("/dashboard");
     else navigate("/");
   };
 

@@ -16,6 +16,8 @@ import JobSearchPage from "./components/Jobs/JobsSearchPage";
 import SavedJobsPage from "./components/Jobs/SavedJobsPage";
 import ResumeBuilder from "./components/Resumes/ResumeBuilder";
 import ResetPassword from "./components/ResetPasswordPage/ResetPassword";
+import UserDashboard from "./components/Dashboard/UserDashboard";
+
 import { Modal } from "./context/Modal";
 
 function Layout() {
@@ -130,6 +132,14 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/dashboard",
+        element: (
+          <ProtectedRoute>
+            <UserDashboard />
+          </ProtectedRoute>
+        ),
+      }
     ],
   },
 ]);

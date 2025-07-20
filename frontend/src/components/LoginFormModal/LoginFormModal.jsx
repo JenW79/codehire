@@ -34,7 +34,7 @@ function LoginFormModal() {
     return dispatch(sessionActions.login({ credential, password }))
       .then(() => {
         closeModal();
-        navigate("/applications");
+        navigate("/dashboard");
       })
       .catch(async (res) => {
         const data = await res.json();
@@ -49,7 +49,7 @@ function LoginFormModal() {
       sessionActions.login({ credential: "Demo-lition", password: "password" })
     ).then(() => {
       closeModal();
-      navigate("/applications");
+      navigate("/dashboard");
     });
   };
 

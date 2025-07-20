@@ -15,11 +15,11 @@ export default function CookieInfoModal({ onClose }) {
             We use a few essential cookies to keep your experience smooth:
           </p>
           <ul>
-            <li><FaLock /> <strong>Session Cookie</strong> : Keeps you logged in securely</li>
-            <li><FaShieldAlt /> <strong>CSRF Token</strong> : Protects against malicious requests</li>
+            <li><FaLock /> <strong>Session Cookie:</strong>Keeps you logged in securely.</li>
+            <li><FaShieldAlt /> <strong>CSRF Token:</strong>Protects against malicious requests.</li>
           </ul>
           <p>
-            That is it no tracking, no ads, no 3rd-party analytics. We respect your privacy.
+            That is it! No tracking, no ads, no 3rd-party analytics. We respect your privacy.
           </p>
           <p>
             Want to manage browser cookies? You can do that in your browser settings.
