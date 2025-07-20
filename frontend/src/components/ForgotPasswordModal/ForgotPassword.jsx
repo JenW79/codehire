@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { useModal } from "../../context/Modal";
 import "./ForgotPasswordModal.css";
 
-export default function ForgotPassword() {
+export default function ForgotPasswordModal({ onClose }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(null);
-  // const { closeModal } = useModal();
-  const closeModal = () => {}; 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,26 +13,83 @@ export default function ForgotPassword() {
       body: JSON.stringify({ email }),
     });
 
-    const data = await res.json();
-    setStatus(data.message || data.error);
+    if (res.ok) {
+      setStatus("✅ Check your email for a reset link.");
+    } else {
+      setStatus("❌ Error sending reset link.");
+    }
   };
 
   return (
-    <div className="auth-modal-container">
-      <h2>Forgot Password</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
-        />
-        <button type="submit">Send Reset Link</button>
-        {status && <p className="auth-status">{status}</p>}
-      </form>
-      <button className="modal-close" onClick={closeModal}>Cancel</button>
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.7)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 1000,
+      }}
+    >
+      <div
+        style={{
+          background: "#333",
+          padding: "2rem",
+          borderRadius: "1rem",
+          width: "100%",
+          maxWidth: "400px",
+          color: "#fff",
+          fontFamily: "Poppins, sans-serif",
+        }}
+      >
+        <h3 style={{ marginBottom: "1rem" }}>Forgot Password</h3>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "0.5rem",
+              marginBottom: "1rem",
+              borderRadius: "0.5rem",
+              border: "1px solid #888",
+            }}
+          />
+          <button
+            type="submit"
+            style={{
+              width: "100%",
+              backgroundColor: "#e46615",
+              padding: "0.5rem",
+              borderRadius: "0.5rem",
+              border: "none",
+              color: "#fff",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            Send Reset Link
+          </button>
+        </form>
+        {status && <p style={{ marginTop: "1rem" }}>{status}</p>}
+        <button
+          onClick={onClose}
+          style={{
+            marginTop: "1rem",
+            background: "transparent",
+            border: "none",
+            color: "#aaa",
+            textDecoration: "underline",
+            cursor: "pointer",
+          }}
+        >
+          ← Back to Login
+        </button>
+      </div>
     </div>
   );
 }

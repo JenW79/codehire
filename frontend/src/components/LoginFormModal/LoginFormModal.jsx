@@ -14,8 +14,7 @@ import {
 } from "react-icons/fi";
 import { FaCookieBite } from "react-icons/fa";
 import CookieInfoModal from "../CookieInfoModal/CookieInfoModal";
-// import ForgotPassword from "../ForgotPasswordModal/ForgotPassword";
-import TestModal from "../TestModal/TestModal";
+import ForgotPassword from "../ForgotPasswordModal/ForgotPassword";
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -25,6 +24,7 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showCookieInfo, setShowCookieInfo] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const { closeModal, setModalContent } = useModal();
 
@@ -105,7 +105,7 @@ function LoginFormModal() {
               className="forgot-link"
               onClick={(e) => {
                 e.preventDefault();
-                setModalContent(TestModal);
+                setShowForgotPassword(true); // toggle like cookie modal
               }}
             >
               Forgot password?
@@ -162,6 +162,7 @@ function LoginFormModal() {
       {showCookieInfo && (
         <CookieInfoModal onClose={() => setShowCookieInfo(false)} />
       )}
+      {showForgotPassword && <ForgotPassword onClose={() => setShowForgotPassword(false)} />}
     </>
   );
 }
