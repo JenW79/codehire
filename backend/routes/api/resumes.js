@@ -114,21 +114,18 @@ router.post("/generate", requireAuth, async (req, res) => {
   prompt += `\nFormat it cleanly and make it ATS-friendly.`;
 
   try {
-    const completion = await openai.createChatCompletion({
+    const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
           content: "You are a professional resume writer for tech jobs.",
         },
-        {
-          role: "user",
-          content: prompt,
-        },
+        { role: "user", content: prompt },
       ],
     });
 
-    const resumeText = completion.data.choices[0].message.content;
+    const resumeText = completion.choices[0].message.content;
 
     const newResume = await Resume.create({
       userId,

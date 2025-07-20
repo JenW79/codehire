@@ -1,5 +1,6 @@
 import { useModal } from "../../context/Modal";
 import SignupFormModal from "../SignupFormModal/SignupFormModal";
+import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import { FaClipboardList, FaFileAlt, FaBriefcase } from "react-icons/fa";
 import "../LandingPage/LandingPage.css";
 

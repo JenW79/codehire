@@ -14,6 +14,8 @@ import {
 } from "react-icons/fi";
 import { FaCookieBite } from "react-icons/fa";
 import CookieInfoModal from "../CookieInfoModal/CookieInfoModal";
+// import ForgotPassword from "../ForgotPasswordModal/ForgotPassword";
+import TestModal from "../TestModal/TestModal";
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -24,7 +26,7 @@ function LoginFormModal() {
   const [showPassword, setShowPassword] = useState(false);
   const [showCookieInfo, setShowCookieInfo] = useState(false);
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  const { closeModal, setModalContent } = useModal();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -98,7 +100,14 @@ function LoginFormModal() {
               <input type="checkbox" />
               Remember me
             </label>
-            <a href="#" className="forgot-link">
+            <a
+              href="#"
+              className="forgot-link"
+              onClick={(e) => {
+                e.preventDefault();
+                setModalContent(TestModal);
+              }}
+            >
               Forgot password?
             </a>
           </div>

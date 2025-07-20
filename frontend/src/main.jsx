@@ -7,7 +7,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import configureStore from "../src/store/store";
 import * as sessionActions from "./store/session";
-import { Modal, ModalProvider } from "./context/Modal";
+import { ModalProvider } from "./context/Modal";
 
 const store = configureStore();
 
@@ -24,7 +24,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ModalProvider>
         <div id="app-wrapper">
           <App />
-          <div id="modal-root" />
         </div>
       </ModalProvider>
     </Provider>

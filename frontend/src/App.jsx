@@ -15,6 +15,7 @@ import Navigation from "./components/Navigation/Navigation";
 import JobSearchPage from "./components/Jobs/JobsSearchPage";
 import SavedJobsPage from "./components/Jobs/SavedJobsPage";
 import ResumeBuilder from "./components/Resumes/ResumeBuilder";
+import ResetPassword from "./components/ResetPasswordPage/ResetPassword";
 import { Modal } from "./context/Modal";
 
 function Layout() {
@@ -121,13 +122,25 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/reset-password/:token",
+        element: (
+          <ProtectedRoute>
+            <ResetPassword />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
 
 // App Component
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+ 
+      <RouterProvider router={router} />
+    
+  );
 }
 
 export default App;
